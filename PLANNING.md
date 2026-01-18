@@ -32,3 +32,20 @@ A home chef food delivery platform connecting home cooks with local food lovers.
 - Simple integration with React
 - Handles OAuth flow out of the box
 - Free tier is generous enough
+
+## Database Schema Design
+
+### Users Collection
+- name, email, password, role (customer/chef), avatar, phone
+
+### Chefs Collection
+- userId (ref), bio, region, speciality, rating, kitchenName
+
+### Items Collection
+- chefId (ref), name, description, price, image, category, spiceLevel
+
+### Orders Collection
+- userId, items[], totalAmount, status, deliveryAddress
+
+### Regions Collection
+- name, image, description, state
