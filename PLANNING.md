@@ -49,3 +49,15 @@ A home chef food delivery platform connecting home cooks with local food lovers.
 
 ### Regions Collection
 - name, image, description, state
+
+## Final Requirements Checklist
+- [x] User auth with email and Google
+- [x] Role-based access (customer vs chef)
+- [x] Chef can add, edit, delete dishes
+- [x] Customers can browse by region
+- [x] Shopping cart with quantity management
+- [x] Order placement and tracking
+- [x] Image uploads via Cloudinary
+- [x] Responsive design for mobile
+- [x] OTP based password reset
+- [x] Search and filter functionality
