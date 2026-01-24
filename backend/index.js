@@ -44,6 +44,12 @@ app.use("/api/region", regionRouter)
 app.use("/api/order", orderRouter)
 app.use("/api/review", reviewRouter)
 
+// Health check endpoint
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "ok", uptime: process.uptime() })
+})
+
+
 app.listen(port, () => {
     connectDb()
     console.log(`server started at ${port}`)
