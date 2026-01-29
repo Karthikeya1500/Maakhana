@@ -19,7 +19,7 @@ app.use(cookieParser())
 app.use("/api/auth",authRouter)
 
 app.listen(port,()=>{
-    connectDb
+    connectDb()
     console.log(`server started at ${port}`)
 })
 
