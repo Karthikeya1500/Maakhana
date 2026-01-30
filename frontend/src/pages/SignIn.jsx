@@ -60,8 +60,6 @@ const SignIn = () => {
           Sign in to your account and bring home-style food to your door
         </p>
 
-        
-
         {/* Email */}
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
