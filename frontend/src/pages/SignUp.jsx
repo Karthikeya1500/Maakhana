@@ -39,24 +39,24 @@ const SignUp = () => {
   };
 
   const handleGoogleAuth=async () => {
-        // if(!mobile){
-        //   return setErr("mobile no is required")
-        // }
+        if(!mobile){
+          return setErr("mobile no is required")
+        }
         const provider=new GoogleAuthProvider()
         const result=await signInWithPopup(auth,provider)
         console.log("google")
-  // try {
-  //   const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
-  //       fullName:result.user.displayName,
-  //       email:result.user.email,
-  //       role,
-  //       mobile
-  //   },{withCredentials:true})
-  //  dispatch(setUserData(data))
-  // }
-  //  catch (error) {
-  //   console.log(error)
-  // }
+  try {
+    const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
+        fullName:result.user.displayName,
+        email:result.user.email,
+        role,
+        mobile
+    },{withCredentials:true})
+   dispatch(setUserData(data))
+  }
+   catch (error) {
+    console.log(error)
+  }
      }
 
   return (
