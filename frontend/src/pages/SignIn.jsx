@@ -7,6 +7,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import axios from "axios"
 import { serverUrl } from "../App";
 import { auth } from "../../firebase";
+
 const SignIn = () => {
   const primaryColor = "#FF7A00";
   const hoverColor = "#E66A00";
@@ -26,14 +27,20 @@ const SignIn = () => {
   const [err, setErr] = useState("");
 
   const handleSignIn = async () => {
+    setLoading(true)
     try{
       const result = await axios.post(`${serverUrl}/api/auth/signin`,{
         email,password
       },{withCredentials:true})
       console.log(result)
+      setErr("")
+      setLoading(false)
     }
     catch(err){
       console.log(err)
+      setErr(error?.response?.data?.message)
+             setLoading(false)
+
 
     }
   };
