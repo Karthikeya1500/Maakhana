@@ -3,8 +3,10 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import axios from "axios"
 import { serverUrl } from "../App";
+import { auth } from "../../firebase";
 const SignIn = () => {
   const primaryColor = "#FF7A00";
   const hoverColor = "#E66A00";
@@ -36,9 +38,18 @@ const SignIn = () => {
     }
   };
 
-  const handleGoogleAuth = () => {
-    console.log("Google auth clicked");
-  };
+  const handleGoogleAuth=async () => {
+             const provider=new GoogleAuthProvider()
+             const result=await signInWithPopup(auth,provider)
+       try {
+         const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
+             email:result.user.email,
+         },{withCredentials:true})
+         dispatch(setUserData(data))
+       } catch (error) {
+         console.log(error)
+       }
+      }
 
   return (
     <div
