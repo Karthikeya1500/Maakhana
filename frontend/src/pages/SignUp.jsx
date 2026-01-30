@@ -3,6 +3,8 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../firebase';
 import axios from "axios"
 import { serverUrl } from "../App";
 const SignUp = () => {
@@ -36,9 +38,26 @@ const SignUp = () => {
     }
   };
 
-  const handleGoogleAuth = () => {
-    console.log("Google auth clicked");
-  };
+  const handleGoogleAuth=async () => {
+        // if(!mobile){
+        //   return setErr("mobile no is required")
+        // }
+        const provider=new GoogleAuthProvider()
+        const result=await signInWithPopup(auth,provider)
+        console.log("google")
+  // try {
+  //   const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
+  //       fullName:result.user.displayName,
+  //       email:result.user.email,
+  //       role,
+  //       mobile
+  //   },{withCredentials:true})
+  //  dispatch(setUserData(data))
+  // }
+  //  catch (error) {
+  //   console.log(error)
+  // }
+     }
 
   return (
     <div
