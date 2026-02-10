@@ -32,7 +32,7 @@ const SignIn = () => {
       const result = await axios.post(`${serverUrl}/api/auth/signin`,{
         email,password
       },{withCredentials:true})
-      console.log(result)
+      dispatch(setUserData(result.data))
       setErr("")
       setLoading(false)
     }
