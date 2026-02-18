@@ -13,7 +13,7 @@ erDiagram
         varchar password_hash
         varchar name
         varchar phone
-        enum role "CUSTOMER | HOMECHEF | ADMIN"
+        enum role "CUSTOMER, HOMECHEF, ADMIN"
         boolean is_active
         timestamp created_at
         timestamp updated_at
@@ -21,9 +21,9 @@ erDiagram
 
     CUSTOMERS {
         uuid id PK
-        uuid user_id FK UK
+        uuid user_id FK
         varchar delivery_address
-        text favorite_chefs "JSON array of chef IDs"
+        text favorite_chefs "JSON array"
         int order_count
         timestamp created_at
         timestamp updated_at
@@ -31,7 +31,7 @@ erDiagram
 
     HOMECHEFS {
         uuid id PK
-        uuid user_id FK UK
+        uuid user_id FK
         uuid state_id FK
         text specialties "JSON array"
         text bio
@@ -72,7 +72,7 @@ erDiagram
         uuid customer_id FK
         uuid chef_id FK
         decimal total_amount
-        enum status "PLACED | CONFIRMED | PREPARING | READY | DELIVERED | CANCELLED"
+        enum status "PLACED, CONFIRMED, PREPARING, READY, DELIVERED, CANCELLED"
         varchar delivery_address
         uuid payment_id FK
         uuid state_id FK
@@ -93,7 +93,7 @@ erDiagram
 
     CART {
         uuid id PK
-        uuid customer_id FK UK
+        uuid customer_id FK
         decimal total_amount
         timestamp created_at
         timestamp updated_at
@@ -110,12 +110,12 @@ erDiagram
 
     PAYMENTS {
         uuid id PK
-        uuid order_id FK UK
+        uuid order_id FK
         uuid customer_id FK
         decimal amount
-        enum method "UPI | CARD | COD | WALLET"
-        enum status "PENDING | PROCESSING | SUCCESS | FAILED | REFUNDED"
-        varchar transaction_id UK
+        enum method "UPI, CARD, COD, WALLET"
+        enum status "PENDING, PROCESSING, SUCCESS, FAILED, REFUNDED"
+        varchar transaction_id
         timestamp paid_at
         timestamp created_at
         timestamp updated_at
@@ -125,7 +125,7 @@ erDiagram
         uuid id PK
         uuid customer_id FK
         uuid chef_id FK
-        uuid order_id FK UK
+        uuid order_id FK
         int rating "1 to 5"
         text comment
         timestamp created_at
@@ -135,7 +135,7 @@ erDiagram
     NOTIFICATIONS {
         uuid id PK
         uuid user_id FK
-        enum type "NEW_ORDER | ORDER_CONFIRMED | ORDER_PREPARING | ORDER_DELIVERED | CHEF_APPROVED | CHEF_REJECTED | SYSTEM"
+        enum type "NEW_ORDER, ORDER_CONFIRMED, ORDER_PREPARING, ORDER_DELIVERED, CHEF_APPROVED, CHEF_REJECTED, SYSTEM"
         varchar title
         text message
         boolean is_read
