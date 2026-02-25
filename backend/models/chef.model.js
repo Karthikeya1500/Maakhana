@@ -1,37 +1,56 @@
 import mongoose from "mongoose";
 
-const chefSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+const chefSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
     },
-    image:{
-        type:String,
-        required:true
+    image: {
+        type: String,
+        default: ""
     },
-    homechef:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Customer",
-        required:true
+    homechef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Customer",
+        required: true
     },
-    city:{
-         type:String,
-        required:true
+    bio: {
+        type: String,
+        default: ""
     },
-    state:{
-         type:String,
-        required:true
+    specialty: {
+        type: String,
+        default: ""
     },
-    address:{
-        type:String,
-        required:true
+    experience: {
+        type: String,
+        default: ""
     },
-    items:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Item"
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    rating: {
+        average: { type: Number, default: 0 },
+        count: { type: Number, default: 0 }
+    },
+    mealsServed: {
+        type: Number,
+        default: 0
+    },
+    items: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item"
     }]
+}, { timestamps: true })
 
-},{timestamps:true})
-
-const chef=mongoose.model("HomeCook",chefSchema)
+const chef = mongoose.model("HomeCook", chefSchema)
 export default chef

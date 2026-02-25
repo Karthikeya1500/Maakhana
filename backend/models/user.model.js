@@ -1,5 +1,15 @@
 import mongoose from "mongoose";
 
+const addressSchema = new mongoose.Schema({
+    label: { type: String, default: "Home" },       // Home, Work, Other
+    fullAddress: { type: String, required: true },
+    city: { type: String, default: "" },
+    state: { type: String, default: "" },
+    pincode: { type: String, default: "" },
+    phone: { type: String, default: "" },
+    isDefault: { type: Boolean, default: false },
+}, { _id: true, timestamps: false });
+
 const userSchema = new mongoose.Schema({
     fullName: {
         type: String,
@@ -8,32 +18,42 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     },
-    password:{
+    password: {
         type: String,
     },
-    mobile:{
+    role: {
         type: String,
-        required: true, 
+        enum: ["Customer", "HomeCook"],
+        default: "Customer",
+        required: true
     },
-    role:{
-        type:String,
-        enum:["Customer", "HomeCook", "DeliveryBoy"],
-        required:true
+    phone: {
+        type: String,
+        default: ""
     },
-    resetOtp:{
-        type:String
+    dob: {
+        type: String,
+        default: ""
     },
-    isOtpVerified:{
-        type:Boolean,
-        default:false
+    addresses: [addressSchema],
+    favoriteChefs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "HomeCook"
+    }],
+    resetOtp: {
+        type: String
     },
-    otpExpires:{
-        type:Date
+    isOtpVerified: {
+        type: Boolean,
+        default: false
+    },
+    otpExpires: {
+        type: Date
     }
 
-},{timestamps:true})
+}, { timestamps: true })
 
-const User = mongoose.model("Customer",userSchema)
+const User = mongoose.model("Customer", userSchema)
 export default User;

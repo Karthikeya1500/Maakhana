@@ -23,50 +23,50 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState("Customer");
-  
+
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const handleSignUp = async () => {
     setLoading(true)
-    try{
-      const result = await axios.post(`${serverUrl}/api/auth/signup`,{
-        fullName,email,password,mobile,role
-      },{withCredentials:true})
+    try {
+      const result = await axios.post(`${serverUrl}/api/auth/signup`, {
+        fullName, email, password, mobile, role
+      }, { withCredentials: true })
       dispatch(setUserData(result.data))
       setErr("")
       setLoading(false)
     }
-    catch(error){
+    catch (error) {
       setErr(error?.response?.data?.message)
       setLoading(false)
 
     }
   };
 
-  const handleGoogleAuth=async () => {
-        if(!mobile){
-          return setErr("mobile no is required")
-        }
-        const provider=new GoogleAuthProvider()
-        const result=await signInWithPopup(auth,provider)
-        console.log("google")
-  try {
-    const {data}=await axios.post(`${serverUrl}/api/auth/google-auth`,{
-        fullName:result.user.displayName,
-        email:result.user.email,
+  const handleGoogleAuth = async () => {
+    if (!mobile) {
+      return setErr("mobile no is required")
+    }
+    const provider = new GoogleAuthProvider()
+    const result = await signInWithPopup(auth, provider)
+    console.log("google")
+    try {
+      const { data } = await axios.post(`${serverUrl}/api/auth/google-auth`, {
+        fullName: result.user.displayName,
+        email: result.user.email,
         role,
         mobile
-    },{withCredentials:true})
-   dispatch(setUserData(data))
+      }, { withCredentials: true })
+      dispatch(setUserData(data))
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
-   catch (error) {
-    console.log(error)
-  }
-     }
 
   return (
-    
+
     <div
       className="min-h-screen w-full flex items-center justify-center p-4"
       style={{ backgroundColor: bgColor }}
@@ -165,7 +165,7 @@ const SignUp = () => {
             Role
           </label>
           <div className="flex gap-2">
-            {["Customer", "HomeCook", "DeliveryBoy"].map((r) => (
+            {["Customer", "HomeCook"].map((r) => (
               <button
                 key={r}
                 type="button"

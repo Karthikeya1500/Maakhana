@@ -5,19 +5,25 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        default: ""
+    },
     image: {
         type: String,
-        required: true
+        default: ""
     },
     shop: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "chef"
+        ref: "HomeCook"
     },
     category: {
         type: String,
         enum: ["Snacks",
             "Main Course",
             "Desserts",
+            "Breakfast",
+            "Sides & Pickles",
             "Pizza",
             "Burgers",
             "Sandwiches",
@@ -25,25 +31,40 @@ const itemSchema = new mongoose.Schema({
             "North Indian",
             "Chinese",
             "Fast Food",
+            "Beverages",
             "Others"
         ],
-        required:true
+        required: true
     },
-    price:{
-        type:Number,
-        min:0,
-        required:true
+    price: {
+        type: Number,
+        min: 0,
+        required: true
     },
-    foodType:{
-        type:String,
-        enum:["veg","non veg"],
-        required:true
+    foodType: {
+        type: String,
+        enum: ["veg", "non veg"],
+        required: true
     },
-   rating:{
-    average:{type:Number,default:0},
-    count:{type:Number,default:0}
-   }
+    spiceLevel: {
+        type: Number,
+        min: 0,
+        max: 3,
+        default: 1
+    },
+    isAvailable: {
+        type: Boolean,
+        default: true
+    },
+    rating: {
+        average: { type: Number, default: 0 },
+        count: { type: Number, default: 0 }
+    },
+    orderCount: {
+        type: Number,
+        default: 0
+    }
 }, { timestamps: true })
 
-const Item=mongoose.model("Item",itemSchema)
+const Item = mongoose.model("Item", itemSchema)
 export default Item

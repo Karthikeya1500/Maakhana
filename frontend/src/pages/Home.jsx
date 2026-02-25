@@ -1,18 +1,22 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import UserDashboard from '../components/userDashboard.jsx'
+import Nav from '../components/Nav.jsx'
 import Homechef from '../components/Homecook.jsx'
-import DeliveryBoy from '../components/DeliveryBoy.jsx'
+import LandingPage from './LandingPage.jsx'
 
 function Home() {
-    const {userData}=useSelector(state=>state.user)
-  return (
-    <div className='w-[100vw] min-h-[100vh] pt-[100px] flex flex-col items-center bg-[#fff9f6]'>
-      {userData.role=="Customer" && <UserDashboard/>}
-      {userData.role=="HomeCook" && <Homechef/>}
-      {userData.role=="DeliveryBoy" && <DeliveryBoy/>}
-    </div>
-  )
+  const { userData } = useSelector(state => state.user)
+
+  if (!userData) return null
+
+  // HomeCook gets their own full-screen sidebar dashboard (no top Nav)
+  if (userData.role === "HomeCook") {
+    return <Homechef />
+  }
+
+  // Customer: LandingPage now reads userData from Redux directly,
+  // so it always shows Nav (cart + profile) when authenticated.
+  return <LandingPage />
 }
 
 export default Home

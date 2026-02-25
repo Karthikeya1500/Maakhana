@@ -1,11 +1,8 @@
 import React from 'react'
+import ChefDashboard from './ChefDashboard'
 
 const Homecook = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <ChefDashboard />
 }
 
 export default Homecook

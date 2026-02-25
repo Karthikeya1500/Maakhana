@@ -11,13 +11,13 @@ import { FaPlus } from "react-icons/fa6";
 import { TbReceipt2 } from "react-icons/tb";
 import { useNavigate } from 'react-router-dom';
 function Nav() {
-    const { userData, currentCity ,cartItems} = useSelector(state => state.Customer)
-    const { myShopData} = useSelector(state => state.HomeCook)
+    const { userData, currentCity, cartItems } = useSelector(state => state.user)
+    const myShopData = null // TODO: Add HomeCook slice when ready
     const [showInfo, setShowInfo] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
-    const [query,setQuery]=useState("")
+    const [query, setQuery] = useState("")
     const dispatch = useDispatch()
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const handleLogOut = async () => {
         try {
             const result = await axios.get(`${serverUrl}/api/auth/signout`, { withCredentials: true })
@@ -27,23 +27,26 @@ function Nav() {
         }
     }
 
-    const handleSearchItems=async () => {
-      try {
-        const result=await axios.get(`${serverUrl}/api/item/search-items?query=${query}&city=${currentCity}`,{withCredentials:true})
-    dispatch(setSearchItems(result.data))
-      } catch (error) {
-        console.log(error)
-      }
+    const handleSearchItems = async () => {
+        try {
+            const result = await axios.get(`${serverUrl}/api/item/search-items?query=${query}&city=${currentCity}`, { withCredentials: true })
+            dispatch(setSearchItems(result.data))
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    useEffect(()=>{
-        if(query){
-handleSearchItems()
-        }else{
-              dispatch(setSearchItems(null))
+    useEffect(() => {
+        if (query) {
+            handleSearchItems()
+        } else {
+            dispatch(setSearchItems(null))
         }
 
-    },[query])
+    }, [query])
+
+    if (!userData) return null
+
     return (
         <div className='w-full h-[80px] flex items-center justify-between md:justify-center gap-[30px] px-[20px] fixed top-0 z-[9999] bg-[#fff9f6] overflow-visible'>
 
@@ -54,7 +57,7 @@ handleSearchItems()
                 </div>
                 <div className='w-[80%] flex items-center gap-[10px]'>
                     <IoIosSearch size={25} className='text-[#ff4d2d]' />
-                    <input type="text" placeholder='search delicious food...' className='px-[10px] text-gray-700 outline-0 w-full' onChange={(e)=>setQuery(e.target.value)} value={query}/>
+                    <input type="text" placeholder='search delicious food...' className='px-[10px] text-gray-700 outline-0 w-full' onChange={(e) => setQuery(e.target.value)} value={query} />
                 </div>
             </div>}
 
@@ -68,43 +71,43 @@ handleSearchItems()
                 </div>
                 <div className='w-[80%] flex items-center gap-[10px]'>
                     <IoIosSearch size={25} className='text-[#ff4d2d]' />
-                    <input type="text" placeholder='search delicious food...' className='px-[10px] text-gray-700 outline-0 w-full' onChange={(e)=>setQuery(e.target.value)} value={query}/>
+                    <input type="text" placeholder='search delicious food...' className='px-[10px] text-gray-700 outline-0 w-full' onChange={(e) => setQuery(e.target.value)} value={query} />
                 </div>
             </div>}
 
             <div className='flex items-center gap-4'>
                 {userData.role == "Customer" && (showSearch ? <RxCross2 size={25} className='text-[#ff4d2d] md:hidden' onClick={() => setShowSearch(false)} /> : <IoIosSearch size={25} className='text-[#ff4d2d] md:hidden' onClick={() => setShowSearch(true)} />)
                 }
-                {userData.role == "HomeCook"? <>
-                 {myShopData && <> <button className='hidden md:flex items-center gap-1 p-2 cursor-pointer rounded-full bg-[#ff4d2d]/10 text-[#ff4d2d]' onClick={()=>navigate("/add-item")}>
+                {userData.role == "HomeCook" ? <>
+                    {myShopData && <> <button className='hidden md:flex items-center gap-1 p-2 cursor-pointer rounded-full bg-[#ff4d2d]/10 text-[#ff4d2d]' onClick={() => navigate("/add-item")}>
                         <FaPlus size={20} />
                         <span>Add Food Item</span>
                     </button>
-                      <button className='md:hidden flex items-center  p-2 cursor-pointer rounded-full bg-[#ff4d2d]/10 text-[#ff4d2d]' onClick={()=>navigate("/add-item")}>
-                        <FaPlus size={20} />
-                    </button></>}
-                   
-                    <div className='hidden md:flex items-center gap-2 cursor-pointer relative px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] font-medium' onClick={()=>navigate("/my-orders")}>
-                      <TbReceipt2 size={20}/>
-                      <span>My Orders</span>
-                      
+                        <button className='md:hidden flex items-center  p-2 cursor-pointer rounded-full bg-[#ff4d2d]/10 text-[#ff4d2d]' onClick={() => navigate("/add-item")}>
+                            <FaPlus size={20} />
+                        </button></>}
+
+                    <div className='hidden md:flex items-center gap-2 cursor-pointer relative px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] font-medium' onClick={() => navigate("/my-orders")}>
+                        <TbReceipt2 size={20} />
+                        <span>My Orders</span>
+
                     </div>
-                     <div className='md:hidden flex items-center gap-2 cursor-pointer relative px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] font-medium' onClick={()=>navigate("/my-orders")}>
-                      <TbReceipt2 size={20}/>
-                      
+                    <div className='md:hidden flex items-center gap-2 cursor-pointer relative px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] font-medium' onClick={() => navigate("/my-orders")}>
+                        <TbReceipt2 size={20} />
+
                     </div>
-                </>: (
+                </> : (
                     <>
-                 {userData.role=="Customer" &&    <div className='relative cursor-pointer' onClick={()=>navigate("/cart")}>
-                    <FiShoppingCart size={25} className='text-[#ff4d2d]' />
-                    <span className='absolute right-[-9px] top-[-12px] text-[#ff4d2d]'>{cartItems.length}</span>
-                </div>}   
-           
+                        {userData.role == "Customer" && <div className='relative cursor-pointer' onClick={() => navigate("/cart")}>
+                            <FiShoppingCart size={25} className='text-[#ff4d2d]' />
+                            <span className='absolute right-[-9px] top-[-12px] text-[#ff4d2d]'>{cartItems.length}</span>
+                        </div>}
 
 
-                <button className='hidden md:block px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] text-sm font-medium' onClick={()=>navigate("/my-orders")}>
-                    My Orders
-                </button>
+
+                        <button className='hidden md:block px-3 py-1 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] text-sm font-medium' onClick={() => navigate("/my-orders")}>
+                            My Orders
+                        </button>
                     </>
                 )}
 
@@ -114,10 +117,10 @@ handleSearchItems()
                     {userData?.fullName.slice(0, 1)}
                 </div>
                 {showInfo && <div className={`fixed top-[80px] right-[10px] 
-                    ${userData.role=="DeliveryBoy"?"md:right-[20%] lg:right-[40%]":"md:right-[10%] lg:right-[25%]"} w-[180px] bg-white shadow-2xl rounded-xl p-[20px] flex flex-col gap-[10px] z-[9999]`}>
+                    md:right-[10%] lg:right-[25%] w-[180px] bg-white shadow-2xl rounded-xl p-[20px] flex flex-col gap-[10px] z-[9999]`}>
                     <div className='text-[17px] font-semibold'>{userData.fullName}</div>
-                    {userData.role=="Customer" && <div className='md:hidden text-[#ff4d2d] font-semibold cursor-pointer' onClick={()=>navigate("/my-orders")}>My Orders</div>}
-                    
+                    {userData.role == "Customer" && <div className='md:hidden text-[#ff4d2d] font-semibold cursor-pointer' onClick={() => navigate("/my-orders")}>My Orders</div>}
+
                     <div className='text-[#ff4d2d] font-semibold cursor-pointer' onClick={handleLogOut}>Log Out</div>
                 </div>}
 
