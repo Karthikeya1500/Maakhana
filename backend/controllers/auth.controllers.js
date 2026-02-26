@@ -26,9 +26,10 @@ export const signUp = async (req, res) => {
         })
 
         const token = await genarateToken(user._id)
+        const isProduction = process.env.NODE_ENV === "production"
         res.cookie("token", token, {
-            secure: false,
-            sameSite: "strict",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "strict",
             maxAge: 9 * 24 * 60 * 60 * 1000,
             httpOnly: true
         })
@@ -58,9 +59,10 @@ export const signIn = async (req, res) => {
         }
 
         const token = await genarateToken(user._id)
+        const isProduction = process.env.NODE_ENV === "production"
         res.cookie("token", token, {
-            secure: false,
-            sameSite: "strict",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "strict",
             maxAge: 9 * 24 * 60 * 60 * 1000,
             httpOnly: true
         })
@@ -75,7 +77,12 @@ export const signIn = async (req, res) => {
 
 export const signOut = async (req, res) => {
     try {
-        res.clearCookie("token")
+        const isProduction = process.env.NODE_ENV === "production"
+        res.clearCookie("token", {
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "strict",
+            httpOnly: true
+        })
         return res.status(200).json({ message: "log out successfully" })
 
     }
@@ -154,9 +161,10 @@ export const googleAuth = async (req, res) => {
         }
 
         const token = await genarateToken(user._id)
+        const isProduction = process.env.NODE_ENV === "production"
         res.cookie("token", token, {
-            secure: false,
-            sameSite: "strict",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
             httpOnly: true
         })
