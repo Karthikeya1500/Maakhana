@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const SERVER_URL = "http://localhost:8000";
+import { serverUrl as SERVER_URL } from "../App";
 
 // ── Async Thunks for Cart API ──
 export const fetchCart = createAsyncThunk("user/fetchCart", async (_, { rejectWithValue }) => {
@@ -74,6 +73,15 @@ export const rateOrderAPI = createAsyncThunk("user/rateOrder", async ({ orderId,
     return res.data;
   } catch (err) {
     return rejectWithValue(err.response?.data?.message || "Failed to rate");
+  }
+});
+
+export const addReviewAPI = createAsyncThunk("user/addReview", async (reviewData, { rejectWithValue }) => {
+  try {
+    const res = await axios.post(`${SERVER_URL}/api/review/add`, reviewData, { withCredentials: true });
+    return res.data;
+  } catch (err) {
+    return rejectWithValue(err.response?.data?.message || "Failed to submit review");
   }
 });
 

@@ -106,7 +106,9 @@ const AuthPage = ({ initialTab = "login" }) => {
       dispatch(setUserData(result.data));
       navigate("/");
     } catch (error) {
-      setSignupErr(error?.response?.data?.message || "Sign up failed");
+      console.error("Sign up failed:", error);
+      const errMsg = error.response?.data?.message || error.message || "Sign up failed. Please try again.";
+      setSignupErr(errMsg);
     } finally {
       setSignupLoading(false);
     }
@@ -655,8 +657,8 @@ const AuthPage = ({ initialTab = "login" }) => {
               <button
                 onClick={() => setSelectedRole("Customer")}
                 className={`w-full p-5 rounded-xl border-2 transition-all cursor-pointer flex items-center gap-4 ${selectedRole === "Customer"
-                    ? "border-[#f4a462] bg-[#f4a462]/5 shadow-md"
-                    : "border-slate-200 hover:border-[#f4a462]/40 hover:bg-[#f4a462]/5"
+                  ? "border-[#f4a462] bg-[#f4a462]/5 shadow-md"
+                  : "border-slate-200 hover:border-[#f4a462]/40 hover:bg-[#f4a462]/5"
                   }`}
               >
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedRole === "Customer" ? "bg-[#f4a462] text-white" : "bg-slate-100 text-slate-500"
@@ -676,8 +678,8 @@ const AuthPage = ({ initialTab = "login" }) => {
               <button
                 onClick={() => setSelectedRole("HomeCook")}
                 className={`w-full p-5 rounded-xl border-2 transition-all cursor-pointer flex items-center gap-4 ${selectedRole === "HomeCook"
-                    ? "border-[#f4a462] bg-[#f4a462]/5 shadow-md"
-                    : "border-slate-200 hover:border-[#f4a462]/40 hover:bg-[#f4a462]/5"
+                  ? "border-[#f4a462] bg-[#f4a462]/5 shadow-md"
+                  : "border-slate-200 hover:border-[#f4a462]/40 hover:bg-[#f4a462]/5"
                   }`}
               >
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${selectedRole === "HomeCook" ? "bg-[#f4a462] text-white" : "bg-slate-100 text-slate-500"

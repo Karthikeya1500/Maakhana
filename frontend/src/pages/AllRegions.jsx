@@ -85,6 +85,33 @@ const AllRegions = () => {
                     </div>
                 )}
             </main>
+
+            {/* ══ FOOTER ══ */}
+            <footer className="bg-white border-t border-slate-200 py-12 mt-20 px-4">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                    {/* Brand */}
+                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+                        <div className="w-8 h-8 bg-[#f4a462] rounded-lg flex items-center justify-center">
+                            <span className="material-symbols-outlined text-[#221810] font-bold text-lg">restaurant</span>
+                        </div>
+                        <span className="text-2xl font-black tracking-tight">Maakhana</span>
+                    </div>
+
+                    {/* Simple Links */}
+                    <div className="flex flex-wrap justify-center gap-8 text-sm font-bold text-slate-500">
+                        <button onClick={() => navigate('/')} className="hover:text-[#f4a462] cursor-pointer transition-colors bg-transparent border-none">Home</button>
+                        <button onClick={() => navigate('/regions')} className="hover:text-[#f4a462] cursor-pointer transition-colors bg-transparent border-none">Regions</button>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Privacy Policy</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Terms of Service</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Contact Us</a>
+                    </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-xs text-center md:text-left">
+                    <p>© 2024 Maakhana Foods Pvt Ltd. All rights reserved.</p>
+                    <p className="flex items-center gap-1"><span className="material-symbols-outlined text-[10px]">favorite</span> Celebrating Indian Regional Heritage</p>
+                </div>
+            </footer>
         </div>
     );
 };

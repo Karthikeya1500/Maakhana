@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchMyOrdersAPI, rateOrderAPI } from '../redux/userSlice'
+import { fetchMyOrdersAPI, rateOrderAPI, addReviewAPI } from '../redux/userSlice'
 
 const MyOrders = () => {
     const navigate = useNavigate()
@@ -14,11 +14,19 @@ const MyOrders = () => {
 
     useEffect(() => { dispatch(fetchMyOrdersAPI()) }, [dispatch])
 
-    const handleRate = async () => {
+    const handleRate = async (order) => {
         if (!ratingOrder) return
         setSubmitting(true)
         try {
             await dispatch(rateOrderAPI({ orderId: ratingOrder, rating: ratingValue, review: reviewText })).unwrap()
+            // Link to the Review system
+            await dispatch(addReviewAPI({
+                chefId: order.chef._id,
+                orderId: ratingOrder,
+                rating: ratingValue,
+                comment: reviewText
+            })).unwrap()
+
             setRatingOrder(null)
             setRatingValue(5)
             setReviewText('')
@@ -122,7 +130,7 @@ const MyOrders = () => {
                                                 <input type="text" placeholder="Write a review (optional)" value={reviewText} onChange={e => setReviewText(e.target.value)}
                                                     className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#f4a462]" />
                                                 <div className="flex gap-2">
-                                                    <button onClick={handleRate} disabled={submitting}
+                                                    <button onClick={() => handleRate(order)} disabled={submitting}
                                                         className="bg-[#f4a462] text-white font-bold px-4 py-2 rounded-lg text-sm cursor-pointer disabled:opacity-50">
                                                         {submitting ? 'Submitting...' : 'Submit Rating'}
                                                     </button>

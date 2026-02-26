@@ -553,90 +553,29 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
             </section>
 
             {/* ══════════ FOOTER ══════════ */}
-            <footer className="bg-slate-100 pt-20 pb-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid md:grid-cols-4 gap-12 mb-16">
-                        {/* Brand */}
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 bg-[#f4a462] rounded-lg flex items-center justify-center">
-                                    <span className="material-symbols-outlined text-[#221810] font-bold text-lg">
-                                        restaurant
-                                    </span>
-                                </div>
-                                <span className="text-2xl font-black tracking-tight">
-                                    Maakhana
-                                </span>
-                            </div>
-                            <p className="text-slate-500 text-sm leading-relaxed">
-                                Authentic regional home food delivered to your doorstep.
-                                Supporting home entrepreneurs, one meal at a time.
-                            </p>
-                            <div className="flex gap-4">
-                                {["public", "share", "mail"].map((icon, i) => (
-                                    <a
-                                        key={i}
-                                        className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-400 hover:text-[#f4a462] transition-colors shadow-sm cursor-pointer"
-                                        href="#"
-                                    >
-                                        <span className="material-symbols-outlined text-lg">
-                                            {icon}
-                                        </span>
-                                    </a>
-                                ))}
-                            </div>
+            <footer className="bg-white border-t border-slate-200 py-12 mt-20 px-4">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                    {/* Brand */}
+                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+                        <div className="w-8 h-8 bg-[#f4a462] rounded-lg flex items-center justify-center">
+                            <span className="material-symbols-outlined text-[#221810] font-bold text-lg">restaurant</span>
                         </div>
-
-                        {/* Explore */}
-                        <div>
-                            <h4 className="font-bold text-lg mb-6">Explore</h4>
-                            <ul className="space-y-4 text-slate-500 text-sm">
-                                <li><a className="hover:text-[#f4a462]" href="#">Find Food</a></li>
-                                <li><a className="hover:text-[#f4a462]" href="#">All Regions</a></li>
-                                <li><a className="hover:text-[#f4a462]" href="#">Top Chefs</a></li>
-                                <li><a className="hover:text-[#f4a462]" href="#">Featured Dishes</a></li>
-                            </ul>
-                        </div>
-
-                        {/* Company */}
-                        <div>
-                            <h4 className="font-bold text-lg mb-6">Company</h4>
-                            <ul className="space-y-4 text-slate-500 text-sm">
-                                <li><a className="hover:text-[#f4a462]" href="#">About Us</a></li>
-                                <li><a className="hover:text-[#f4a462]" href="#">Careers</a></li>
-                                <li><a className="hover:text-[#f4a462]" href="#">Become a Partner</a></li>
-                                <li><a className="hover:text-[#f4a462]" href="#">Contact Us</a></li>
-                            </ul>
-                        </div>
-
-                        {/* Newsletter */}
-                        <div>
-                            <h4 className="font-bold text-lg mb-6">Join the Community</h4>
-                            <p className="text-slate-500 text-sm mb-4">
-                                Subscribe to get offers & recipes in your inbox.
-                            </p>
-                            <div className="flex gap-2">
-                                <input
-                                    className="bg-white border border-slate-200 rounded-lg px-4 py-2 text-sm flex-grow outline-none focus:border-[#f4a462]"
-                                    placeholder="Your email"
-                                    type="email"
-                                />
-                                <button className="bg-[#f4a462] text-slate-900 font-bold px-4 py-2 rounded-lg text-sm cursor-pointer">
-                                    Join
-                                </button>
-                            </div>
-                        </div>
+                        <span className="text-2xl font-black tracking-tight">Maakhana</span>
                     </div>
 
-                    {/* Bottom */}
-                    <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-xs">
-                        <p>© 2024 Maakhana Foods Pvt Ltd. All rights reserved.</p>
-                        <div className="flex gap-6">
-                            <a className="hover:text-[#f4a462]" href="#">Privacy Policy</a>
-                            <a className="hover:text-[#f4a462]" href="#">Terms of Service</a>
-                            <a className="hover:text-[#f4a462]" href="#">Cookies</a>
-                        </div>
+                    {/* Simple Links */}
+                    <div className="flex flex-wrap justify-center gap-8 text-sm font-bold text-slate-500">
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors" href="#hero">Home</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors" href="#about">About</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors" onClick={() => navigate('/regions')}>Regions</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Privacy Policy</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Contact</a>
                     </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-xs text-center md:text-left">
+                    <p>© 2024 Maakhana Foods Pvt Ltd. All rights reserved.</p>
+                    <p className="flex items-center gap-1"><span className="material-symbols-outlined text-[10px]">favorite</span> Celebrating Indian Regional Heritage</p>
                 </div>
             </footer>
         </div>

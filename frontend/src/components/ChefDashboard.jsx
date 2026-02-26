@@ -8,7 +8,8 @@ import { serverUrl } from '../App'
 
 const CATEGORIES = [
     "Breakfast", "Main Course", "Snacks", "Desserts", "Sides & Pickles",
-    "South Indian", "North Indian", "Chinese", "Fast Food", "Beverages", "Others"
+    "South Indian", "North Indian", "Chinese", "Fast Food", "Beverages",
+    "Pizza", "Burgers", "Sandwiches", "Others"
 ]
 
 const STATES = [
@@ -57,6 +58,11 @@ const ChefDashboard = () => {
     const [itemSaving, setItemSaving] = useState(false)
     const [deletingId, setDeletingId] = useState(null)
     const [togglingId, setTogglingId] = useState(null)
+    const [editingId, setEditingId] = useState(null)
+
+    // Reviews state
+    const [chefReviews, setChefReviews] = useState([])
+    const [reviewsLoading, setReviewsLoading] = useState(false)
 
     // Toast
     const [toast, setToast] = useState(null)
@@ -65,6 +71,20 @@ const ChefDashboard = () => {
         dispatch(fetchMyShop())
         dispatch(fetchChefOrders())
     }, [dispatch])
+
+    useEffect(() => {
+        if (activeTab === 'reviews' && myShop) {
+            const fetchReviews = async () => {
+                setReviewsLoading(true)
+                try {
+                    const res = await axios.get(`${serverUrl}/api/review/chef/${myShop._id}`)
+                    setChefReviews(res.data)
+                } catch (err) { console.error(err) }
+                finally { setReviewsLoading(false) }
+            }
+            fetchReviews()
+        }
+    }, [activeTab, myShop])
 
     useEffect(() => {
         if (myShop) {
@@ -101,6 +121,7 @@ const ChefDashboard = () => {
         try {
             await dispatch(createEditShop(fd)).unwrap()
             setShowShopForm(false)
+            setShopImage(null)
             showToast('Kitchen profile saved!')
         } catch (err) { console.error(err) }
         finally { setShopSaving(false) }
@@ -112,17 +133,38 @@ const ChefDashboard = () => {
         const fd = new FormData()
         Object.entries(itemForm).forEach(([k, v]) => fd.append(k, v))
         if (itemImage) fd.append('image', itemImage)
+
         try {
-            await dispatch(addItem(fd)).unwrap()
+            if (editingId) {
+                await dispatch(editItem({ itemId: editingId, formData: fd })).unwrap()
+                showToast(`${itemForm.name} updated!`)
+            } else {
+                await dispatch(addItem(fd)).unwrap()
+                showToast('New dish added to menu!')
+            }
             setShowItemForm(false)
+            setEditingId(null)
             setItemForm({ name: '', description: '', category: 'Main Course', foodType: 'veg', price: '', spiceLevel: 1 })
             setItemImage(null)
-            showToast('New dish added to menu!')
         } catch (err) {
             console.error(err)
-            showToast(typeof err === 'string' ? err : 'Failed to add dish. Please try again.')
+            showToast(typeof err === 'string' ? err : `Failed to ${editingId ? 'update' : 'add'} dish. Please try again.`)
         }
         finally { setItemSaving(false) }
+    }
+
+    const handleEditItemClick = (item) => {
+        setEditingId(item._id)
+        setItemForm({
+            name: item.name || '',
+            description: item.description || '',
+            category: item.category || 'Main Course',
+            foodType: item.foodType || 'veg',
+            price: item.price || '',
+            spiceLevel: item.spiceLevel || 1
+        })
+        setItemImage(null)
+        setShowItemForm(true)
     }
 
     const handleDelete = async (itemId) => {
@@ -191,7 +233,7 @@ const ChefDashboard = () => {
         return (
             <div className="flex min-h-screen items-center justify-center bg-[#f8f7f6] px-4" style={{ fontFamily: "'Work Sans', sans-serif" }}>
                 <div className="w-full max-w-2xl">
-                    <button onClick={() => { if (myShop) setShowShopForm(false); else navigate('/') }}
+                    <button onClick={() => { if (myShop) { setShowShopForm(false); setShopImage(null); } else navigate('/') }}
                         className="flex items-center gap-1 text-slate-500 hover:text-[#f4a462] mb-6 cursor-pointer">
                         <span className="material-symbols-outlined">arrow_back</span> Back
                     </button>
@@ -287,6 +329,7 @@ const ChefDashboard = () => {
                         { id: 'dashboard', icon: 'dashboard', label: 'Dashboard' },
                         { id: 'menu', icon: 'restaurant', label: 'My Menu' },
                         { id: 'orders', icon: 'receipt_long', label: 'Orders' },
+                        { id: 'reviews', icon: 'reviews', label: 'Reviews' },
                         { id: 'analytics', icon: 'analytics', label: 'Analytics' },
                         { id: 'profile', icon: 'person', label: 'Profile' },
                     ].map(nav => (
@@ -460,6 +503,60 @@ const ChefDashboard = () => {
                     </div>
                 )}
 
+                {/* ── REVIEWS TAB ── */}
+                {activeTab === 'reviews' && (
+                    <div className="animate-in fade-in duration-500">
+                        <h2 className="text-3xl font-black tracking-tight mb-2">Customer Reviews</h2>
+                        <p className="text-slate-500 mb-8">Direct feedback from your diners</p>
+
+                        {reviewsLoading ? (
+                            <div className="flex items-center justify-center py-20">
+                                <span className="material-symbols-outlined text-4xl text-[#f4a462] animate-spin">progress_activity</span>
+                            </div>
+                        ) : chefReviews.length === 0 ? (
+                            <div className="bg-white rounded-2xl p-16 text-center border border-slate-100 shadow-sm transition-all hover:shadow-md">
+                                <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <span className="material-symbols-outlined text-4xl text-slate-300">reviews</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-800 mb-2">No Reviews Yet</h3>
+                                <p className="text-slate-400 max-w-xs mx-auto">Focus on quality and service, and the reviews will start pouring in!</p>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {chefReviews.map(review => (
+                                    <div key={review._id} className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-md transition-all group">
+                                        <div className="flex items-center justify-between mb-6">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-12 h-12 rounded-full bg-[#f4a462]/10 flex items-center justify-center font-bold text-[#f4a462] text-sm group-hover:scale-110 transition-transform">
+                                                    {(review.customer?.fullName || 'A').split(' ').map(n => n[0]).join('').toUpperCase()}
+                                                </div>
+                                                <div>
+                                                    <p className="font-bold text-slate-800">{review.customer?.fullName}</p>
+                                                    <p className="text-[10px] text-slate-400 font-medium tracking-wider uppercase">{new Date(review.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-0.5 bg-yellow-50 px-3 py-1.5 rounded-full">
+                                                {[1, 2, 3, 4, 5].map(s => (
+                                                    <span key={s} className={`material-symbols-outlined text-xs ${s <= review.rating ? 'text-yellow-500' : 'text-slate-200'}`} style={{ fontVariationSettings: `\"FILL\" 1` }}>star</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="relative">
+                                            <span className="material-symbols-outlined absolute -top-2 -left-3 text-slate-100 text-4xl -z-0">format_quote</span>
+                                            <p className="text-slate-600 text-sm italic leading-relaxed relative z-10">"{review.comment}"</p>
+                                        </div>
+                                        {review.isTopComment && (
+                                            <div className="mt-6 flex items-center gap-2 text-[10px] font-bold text-emerald-600 uppercase bg-emerald-50 w-fit px-3 py-1 rounded-full border border-emerald-100">
+                                                <span className="material-symbols-outlined text-[14px]">verified</span> Featured Review
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 {/* ── MENU TAB ── */}
                 {activeTab === 'menu' && (
                     <>
@@ -529,7 +626,7 @@ const ChefDashboard = () => {
                                             <div className="absolute top-3 right-3 flex gap-2">
                                                 <button
                                                     className="p-2 bg-white/90 rounded-full shadow-md hover:text-[#f4a462] transition-colors cursor-pointer"
-                                                    onClick={() => { /* Could add edit modal */ }}
+                                                    onClick={() => handleEditItemClick(item)}
                                                 >
                                                     <span className="material-symbols-outlined text-[20px]">edit</span>
                                                 </button>
@@ -640,8 +737,8 @@ const ChefDashboard = () => {
                 <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4" onClick={() => setShowItemForm(false)}>
                     <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-8" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-xl font-bold">Add New Dish</h3>
-                            <button onClick={() => setShowItemForm(false)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
+                            <h3 className="text-xl font-bold">{editingId ? 'Edit Dish' : 'Add New Dish'}</h3>
+                            <button onClick={() => { setShowItemForm(false); setEditingId(null); }} className="text-slate-400 hover:text-slate-700 cursor-pointer">
                                 <span className="material-symbols-outlined">close</span>
                             </button>
                         </div>
@@ -677,8 +774,20 @@ const ChefDashboard = () => {
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-semibold text-slate-700 mb-1">Price (₹) *</label>
-                                    <input type="number" required min="1" value={itemForm.price} onChange={e => setItemForm({ ...itemForm, price: e.target.value })}
-                                        className="w-full border border-slate-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#f4a462]/50 outline-none" placeholder="₹" />
+                                    <input
+                                        type="text"
+                                        required
+                                        value={itemForm.price}
+                                        onChange={e => {
+                                            const val = e.target.value.replace(/\D/g, '');
+                                            setItemForm({ ...itemForm, price: val });
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (['e', 'E', '+', '-', '.'].includes(e.key)) e.preventDefault();
+                                        }}
+                                        className="w-full border border-slate-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#f4a462]/50 outline-none"
+                                        placeholder="₹"
+                                    />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-semibold text-slate-700 mb-1">Spice Level</label>
@@ -693,14 +802,14 @@ const ChefDashboard = () => {
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-sm font-semibold text-slate-700 mb-1">Dish Photo *</label>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1">Dish Photo {editingId ? '(Optional)' : '*'}</label>
                                 <input type="file" accept="image/*" onChange={e => setItemImage(e.target.files[0])}
                                     className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#f4a462]/10 file:text-[#f4a462] file:font-semibold hover:file:bg-[#f4a462]/20 cursor-pointer" />
                             </div>
                             <button type="submit" disabled={itemSaving}
                                 className="w-full bg-[#f4a462] text-white font-bold py-4 rounded-xl text-lg hover:bg-[#f4a462]/90 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 active:scale-[0.98]">
-                                {itemSaving ? <span className="material-symbols-outlined animate-spin">progress_activity</span> : <span className="material-symbols-outlined">add_circle</span>}
-                                {itemSaving ? 'Adding...' : 'Add to Menu'}
+                                {itemSaving ? <span className="material-symbols-outlined animate-spin">progress_activity</span> : <span className="material-symbols-outlined">{editingId ? 'save' : 'add_circle'}</span>}
+                                {itemSaving ? (editingId ? 'Saving...' : 'Adding...') : (editingId ? 'Save Changes' : 'Add to Menu')}
                             </button>
                         </form>
                     </div>

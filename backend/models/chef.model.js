@@ -49,7 +49,11 @@ const chefSchema = new mongoose.Schema({
     items: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item"
-    }]
+    }],
+    isPureVeg: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true })
 
 const chef = mongoose.model("HomeCook", chefSchema)

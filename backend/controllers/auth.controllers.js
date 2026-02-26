@@ -33,10 +33,11 @@ export const signUp = async (req, res) => {
             httpOnly: true
         })
 
-        return res.status(201).json(user)
+        return res.status(201).json(user.toObject())
 
     } catch (error) {
-        return res.status(500).json({ message: `Sign up error: ${error}` })
+        console.error("Sign up error:", error);
+        return res.status(500).json({ message: error.message || "An error occurred during sign up." })
     }
 }
 
@@ -64,10 +65,11 @@ export const signIn = async (req, res) => {
             httpOnly: true
         })
 
-        return res.status(201).json(user)
+        return res.status(200).json(user.toObject())
 
     } catch (error) {
-        return res.status(500).json({ message: `Sign in error: ${error}` })
+        console.error("Sign in error:", error);
+        return res.status(500).json({ message: error.message || "An error occurred during sign in." })
     }
 }
 

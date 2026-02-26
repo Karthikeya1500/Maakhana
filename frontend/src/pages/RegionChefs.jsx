@@ -77,9 +77,9 @@ const STATE_META = {
    Placeholder chef data (shown when DB has no results)
 ───────────────────────────────────────────────────────── */
 const PLACEHOLDER_CHEFS = [
-    { _id: 'p1', name: 'Chef Priya', rating: { average: 4.7, count: 98 }, experience: '10 Years', mealsServed: 600, specialty: 'Regional Specialist', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSWTxNxahFlEOToSfExfeJWQEMxCZqQIy7T6kX7rh0E1p5kA15enBGjRJoNtaQIG8-GBLIIso0bgaqeoQFiBwWKG0SWAxT2FawMTT-vANSgd0NyZstLBmrOTs4BpbDJ9qdPwqLxrnR_KxQrIL5ePGzPR64q6ZtBBrm3D3Fzh67yCyxMr-8xu82FjuDYnReslZeT6Nb7VG0FGdDRUxLiglesVCL_t3_g1-R11ccHm2j0u39LrhniQAT0YFQQy6w7WGjkFfERxWwY8M' },
-    { _id: 'p2', name: 'Chef Ravi', rating: { average: 4.8, count: 156 }, experience: '12 Years', mealsServed: 1000, specialty: 'Heritage Cuisine', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA4sDeHK9MOl5YRa3ffQfmnzqiigdvE5Qgd6Anbs7aLE2SzPxPcou1caR0LTlEV5qjLvlDKU25sbz_lVprwvzXEriC8Ac3xp9tO8uDkaJRZMfWM02uQVwE9nWIw-fKaX_izKmzfBKetf2PmA34odDRMyJxel0vrlOd7ioO4H_YguG7SoMd-ls88EEqm_O-h7Jq7qpRE5ICY0ygUJ7k4zAEili3pdnvHqbXjEvbbC-qLF6Jx2PzCV3P1rAWcG1PPvHW4fZruyXJKyLc' },
-    { _id: 'p3', name: 'Chef Meena', rating: { average: 4.6, count: 72 }, experience: '7 Years', mealsServed: 400, specialty: 'Traditional Cook', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDINP1CtiCwK5ZlhGM8Bq2IV5chHbtrD8Y6TMCi5T0x1kBoyaTnm3kiWZ4-oPvGWnMYo0Ts6uZu3S42YR64pE3u6ES6fOOZAUEUhDWicgF8iReoW8HOuHXqb6-xEVP6b6zwIo1TZxB7DCY8fxiloW-4UpiWydMp25rOWlyvMVQkQch0WjqgCEnGsQKvKPBQ5jM35mDZcuoEt-Rq2O1arbQqXYrvTJNynVgKiypE3r5hk278G2FqFLqWqGl53vRiav73vmK6IP88NXI' },
+    { _id: 'p1', name: 'Chef Priya', rating: { average: 4.7, count: 98 }, experience: '10 Years', mealsServed: 600, specialty: 'Regional Specialist', isPureVeg: true, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSWTxNxahFlEOToSfExfeJWQEMxCZqQIy7T6kX7rh0E1p5kA15enBGjRJoNtaQIG8-GBLIIso0bgaqeoQFiBwWKG0SWAxT2FawMTT-vANSgd0NyZstLBmrOTs4BpbDJ9qdPwqLxrnR_KxQrIL5ePGzPR64q6ZtBBrm3D3Fzh67yCyxMr-8xu82FjuDYnReslZeT6Nb7VG0FGdDRUxLiglesVCL_t3_g1-R11ccHm2j0u39LrhniQAT0YFQQy6w7WGjkFfERxWwY8M' },
+    { _id: 'p2', name: 'Chef Ravi', rating: { average: 4.8, count: 156 }, experience: '12 Years', mealsServed: 1000, specialty: 'Heritage Cuisine', isPureVeg: false, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA4sDeHK9MOl5YRa3ffQfmnzqiigdvE5Qgd6Anbs7aLE2SzPxPcou1caR0LTlEV5qjLvlDKU25sbz_lVprwvzXEriC8Ac3xp9tO8uDkaJRZMfWM02uQVwE9nWIw-fKaX_izKmzfBKetf2PmA34odDRMyJxel0vrlOd7ioO4H_YguG7SoMd-ls88EEqm_O-h7Jq7qpRE5ICY0ygUJ7k4zAEili3pdnvHqbXjEvbbC-qLF6Jx2PzCV3P1rAWcG1PPvHW4fZruyXJKyLc' },
+    { _id: 'p3', name: 'Chef Meena', rating: { average: 4.6, count: 72 }, experience: '7 Years', mealsServed: 400, specialty: 'Traditional Cook', isPureVeg: true, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDINP1CtiCwK5ZlhGM8Bq2IV5chHbtrD8Y6TMCi5T0x1kBoyaTnm3kiWZ4-oPvGWnMYo0Ts6uZu3S42YR64pE3u6ES6fOOZAUEUhDWicgF8iReoW8HOuHXqb6-xEVP6b6zwIo1TZxB7DCY8fxiloW-4UpiWydMp25rOWlyvMVQkQch0WjqgCEnGsQKvKPBQ5jM35mDZcuoEt-Rq2O1arbQqXYrvTJNynVgKiypE3r5hk278G2FqFLqWqGl53vRiav73vmK6IP88NXI' },
 ]
 
 
@@ -103,9 +103,26 @@ const RegionChefs = () => {
         return () => dispatch(clearStateChefs())
     }, [decodedState, dispatch])
 
-    // Use DB chefs if available, otherwise show placeholders
-    const chefs = stateChefs.length > 0 ? stateChefs : PLACEHOLDER_CHEFS
     const isPlaceholder = stateChefs.length === 0 && !stateChefsLoading
+    const baseChefs = stateChefs.length > 0 ? stateChefs : PLACEHOLDER_CHEFS
+
+    // ══ FILTER LOGIC ══
+    const chefs = baseChefs.filter(chef => {
+        // Dietary Filter (Exclusive)
+        if (vegOnly && !nonVeg) {
+            if (chef.isPureVeg !== true) return false
+        }
+        if (nonVeg && !vegOnly) {
+            if (chef.isPureVeg === true) return false
+        }
+
+        // Rating Filter
+        if (rating) {
+            if ((chef.rating?.average || 0) < parseFloat(rating)) return false
+        }
+
+        return true
+    })
 
     return (
         <div className="bg-[#f8f7f6] text-slate-900 min-h-screen" style={{ fontFamily: "'Work Sans', sans-serif" }}>
@@ -243,11 +260,7 @@ const RegionChefs = () => {
                                                     alt={chef.name}
                                                     className="w-full h-full object-cover"
                                                 />
-                                                {chef.specialty && (
-                                                    <div className="absolute top-3 right-3 bg-[#2A9D8F] text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
-                                                        {chef.specialty}
-                                                    </div>
-                                                )}
+                                                {/* Removed specialty tag to clear face */}
                                             </div>
                                             <div className="p-5">
                                                 <div className="flex justify-between items-start mb-2">
@@ -264,6 +277,9 @@ const RegionChefs = () => {
                                                     </div>
                                                 </div>
                                                 <div className="flex flex-wrap gap-2 my-4">
+                                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${chef.isPureVeg ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                                        {chef.isPureVeg ? '● PURE VEG' : '● NON-VEG'}
+                                                    </span>
                                                     {chef.experience && <span className="bg-slate-100 text-slate-600 text-[11px] font-semibold px-2 py-1 rounded-md">{chef.experience} Exp</span>}
                                                     {chef.mealsServed > 0 && <span className="bg-slate-100 text-slate-600 text-[11px] font-semibold px-2 py-1 rounded-md">{chef.mealsServed}+ Meals</span>}
                                                     {chef.items?.length > 0 && <span className="bg-slate-100 text-slate-600 text-[11px] font-semibold px-2 py-1 rounded-md">{chef.items.length} Dishes</span>}
@@ -289,20 +305,29 @@ const RegionChefs = () => {
             </main>
 
             {/* ══ FOOTER ══ */}
-            <footer className="mt-20 border-t border-slate-200 bg-white py-12 px-4 lg:px-20">
+            <footer className="bg-white border-t border-slate-200 py-12 mt-20 px-4">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="flex items-center gap-2 text-[#f4a462] cursor-pointer" onClick={() => navigate('/')}>
-                        <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>restaurant</span>
-                        <h2 className="text-slate-900 text-xl font-bold tracking-tight">Maakhana</h2>
+                    {/* Brand */}
+                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+                        <div className="w-8 h-8 bg-[#f4a462] rounded-lg flex items-center justify-center">
+                            <span className="material-symbols-outlined text-[#221810] font-bold text-lg">restaurant</span>
+                        </div>
+                        <span className="text-2xl font-black tracking-tight">Maakhana</span>
                     </div>
-                    <div className="flex gap-8 text-sm text-slate-500 font-medium">
-                        <a className="hover:text-[#f4a462] transition-colors cursor-pointer">Privacy Policy</a>
-                        <a className="hover:text-[#f4a462] transition-colors cursor-pointer">Terms of Service</a>
-                        <a className="hover:text-[#f4a462] transition-colors cursor-pointer">Contact Us</a>
+
+                    {/* Simple Links */}
+                    <div className="flex flex-wrap justify-center gap-8 text-sm font-bold text-slate-500">
+                        <button onClick={() => navigate('/')} className="hover:text-[#f4a462] cursor-pointer transition-colors bg-transparent border-none">Home</button>
+                        <button onClick={() => navigate('/regions')} className="hover:text-[#f4a462] cursor-pointer transition-colors bg-transparent border-none">Regions</button>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Privacy Policy</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Terms of Service</a>
+                        <a className="hover:text-[#f4a462] cursor-pointer transition-colors">Contact Us</a>
                     </div>
                 </div>
-                <div className="max-w-7xl mx-auto text-center mt-8 text-xs text-slate-400">
-                    © 2024 Maakhana. Celebrating regional heritage through flavors.
+
+                <div className="max-w-7xl mx-auto pt-8 mt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-xs text-center md:text-left">
+                    <p>© 2024 Maakhana Foods Pvt Ltd. All rights reserved.</p>
+                    <p className="flex items-center gap-1"><span className="material-symbols-outlined text-[10px]">favorite</span> Celebrating Indian Regional Heritage</p>
                 </div>
             </footer>
         </div>

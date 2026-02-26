@@ -11,12 +11,13 @@ import shopRouter from "./routes/chef.routes.js"
 import itemRouter from "./routes/item.routes.js"
 import regionRouter from "./routes/region.routes.js"
 import orderRouter from "./routes/order.routes.js"
+import reviewRouter from "./routes/review.routes.js"
 
 const app = express()
 
 const port = process.env.PORT || 5000
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true
 }))
 app.use(express.json())
@@ -28,6 +29,7 @@ app.use("/api/shop", shopRouter)
 app.use("/api/item", itemRouter)
 app.use("/api/region", regionRouter)
 app.use("/api/order", orderRouter)
+app.use("/api/review", reviewRouter)
 
 app.listen(port, () => {
     connectDb()

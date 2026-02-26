@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import AuthPage from './pages/AuthPage'
-import ForgotPassword from './pages/forgotpassword'
+import ForgotPassword from './pages/ForgotPassword'
 import LandingPage from './pages/LandingPage'
 import useGetCurrentUser from './hooks/useGetCurrentUser'
 import { useSelector } from 'react-redux'
@@ -14,7 +14,7 @@ import RegionChefs from './pages/RegionChefs'
 import ChefMenu from './pages/ChefMenu'
 import AllRegions from './pages/AllRegions'
 
-export const serverUrl = "http://localhost:8000"
+export const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:8000"
 
 const App = () => {
   useGetCurrentUser()
