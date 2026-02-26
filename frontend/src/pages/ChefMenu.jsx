@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchChefById, clearViewingChef } from '../redux/chefSlice'
 import { addToCartAPI } from '../redux/userSlice'
+import axios from 'axios'
+import { serverUrl } from '../App'
 
 const ChefMenu = () => {
     const { chefId } = useParams()
