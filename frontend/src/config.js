@@ -1,3 +1,5 @@
-// In production, API calls go through Vercel's proxy (same domain, no CORS/cookie issues)
-// In development, API calls go directly to the local backend
-export const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:8000";
+// In production (Vercel), use empty string so requests go through the same-domain proxy
+// In development, use localhost backend directly
+export const serverUrl = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : (import.meta.env.VITE_SERVER_URL || "");
