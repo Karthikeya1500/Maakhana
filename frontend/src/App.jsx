@@ -14,7 +14,8 @@ import RegionChefs from './pages/RegionChefs'
 import ChefMenu from './pages/ChefMenu'
 import AllRegions from './pages/AllRegions'
 
-export const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:8000"
+// Single source of truth — re-export so existing imports still work
+export { serverUrl } from './config'
 
 const App = () => {
   useGetCurrentUser()

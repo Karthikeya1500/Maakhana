@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const SERVER_URL = "http://localhost:8000";
+import { serverUrl as SERVER_URL } from "../config";
 
 // ── Async Thunks ──
 

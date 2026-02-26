@@ -17,7 +17,7 @@ const app = express()
 
 const port = process.env.PORT || 5000
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: process.env.FRONTEND_URL || "maakhana-48ipnkak5-karthikeya1500s-projects.vercel.app",
     credentials: true
 }))
 app.use(express.json())
