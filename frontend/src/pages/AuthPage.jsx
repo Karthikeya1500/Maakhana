@@ -85,8 +85,8 @@ const AuthPage = ({ initialTab = "login" }) => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
-      setLoginErr(error?.response?.data?.message || "Google sign in failed");
+      console.log("Google sign in error:", error);
+      setLoginErr(error?.response?.data?.message || error?.message || "Google sign in failed");
     }
   };
 
