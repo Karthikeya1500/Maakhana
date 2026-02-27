@@ -171,21 +171,26 @@ export const rateOrder = async (req, res) => {
 // GET /api/order/top-chefs — Get top chefs by rating
 export const getTopChefs = async (req, res) => {
     try {
-        const topChefs = await chef.find({ "rating.count": { $gt: 0 } })
+        // First get chefs with ratings
+        const ratedChefs = await chef.find({ "rating.count": { $gt: 0 } })
             .sort({ "rating.average": -1 })
             .limit(4)
             .populate("homechef", "fullName email");
 
-        // If no rated chefs, return chefs with most meals served
-        if (topChefs.length === 0) {
-            const popularChefs = await chef.find()
-                .sort({ mealsServed: -1 })
-                .limit(4)
-                .populate("homechef", "fullName email");
-            return res.status(200).json(popularChefs);
+        // If we have enough rated chefs, return them
+        if (ratedChefs.length >= 4) {
+            return res.status(200).json(ratedChefs);
         }
 
-        return res.status(200).json(topChefs);
+        // Otherwise, fill remaining slots with newest chefs
+        const existingIds = ratedChefs.map(c => c._id);
+        const remaining = 4 - ratedChefs.length;
+        const newChefs = await chef.find({ _id: { $nin: existingIds } })
+            .sort({ createdAt: -1 })
+            .limit(remaining)
+            .populate("homechef", "fullName email");
+
+        return res.status(200).json([...ratedChefs, ...newChefs]);
     } catch (error) {
         return res.status(500).json({ message: `get top chefs error: ${error}` });
     }
@@ -194,22 +199,31 @@ export const getTopChefs = async (req, res) => {
 // GET /api/order/most-ordered — Get most ordered dishes
 export const getMostOrderedDishes = async (req, res) => {
     try {
-        const dishes = await Item.find({ orderCount: { $gt: 0 } })
+        // First get dishes that have been ordered
+        const orderedDishes = await Item.find({ orderCount: { $gt: 0 }, isAvailable: true })
             .sort({ orderCount: -1 })
             .limit(6)
             .populate("shop", "name image city state");
 
-        // If no items ordered yet, return items with highest ratings
-        if (dishes.length === 0) {
-            const ratedDishes = await Item.find()
-                .sort({ "rating.average": -1, createdAt: -1 })
-                .limit(6)
-                .populate("shop", "name image city state");
-            return res.status(200).json(ratedDishes);
+        // If we have enough ordered dishes, return them
+        if (orderedDishes.length >= 6) {
+            return res.status(200).json(orderedDishes);
         }
 
-        return res.status(200).json(dishes);
+        // Otherwise, fill remaining slots with newest available items
+        const existingIds = orderedDishes.map(d => d._id);
+        const remaining = 6 - orderedDishes.length;
+        const newDishes = await Item.find({
+            _id: { $nin: existingIds },
+            isAvailable: true
+        })
+            .sort({ createdAt: -1 })
+            .limit(remaining)
+            .populate("shop", "name image city state");
+
+        return res.status(200).json([...orderedDishes, ...newDishes]);
     } catch (error) {
         return res.status(500).json({ message: `get most ordered dishes error: ${error}` });
     }
 };
+
