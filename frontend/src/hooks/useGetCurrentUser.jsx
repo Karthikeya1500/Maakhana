@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { serverUrl } from '../App'
 import { useDispatch } from 'react-redux'
-import { setUserData, fetchCart } from '../redux/userSlice'
+import { setUserData, setAuthLoading, fetchCart } from '../redux/userSlice'
 
 function useGetCurrentUser() {
   const dispatch = useDispatch()
@@ -15,6 +15,8 @@ function useGetCurrentUser() {
         dispatch(fetchCart())
       } catch (error) {
         console.log(error)
+      } finally {
+        dispatch(setAuthLoading(false))
       }
     }
     fetchUser()

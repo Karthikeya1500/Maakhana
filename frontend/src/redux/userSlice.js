@@ -107,6 +107,7 @@ export const fetchMostOrderedAPI = createAsyncThunk("user/fetchMostOrdered", asy
 const userSlice = createSlice({
   name: "user",
   initialState: {
+    authLoading: true,
     userData: null,
     currentCity: null,
     currentState: null,
@@ -126,6 +127,7 @@ const userSlice = createSlice({
   },
   reducers: {
     setUserData: (state, action) => { state.userData = action.payload },
+    setAuthLoading: (state, action) => { state.authLoading = action.payload },
     setCurrentCity: (state, action) => { state.currentCity = action.payload },
     setCurrentState: (state, action) => { state.currentState = action.payload },
     setCurrentAddress: (state, action) => { state.currentAddress = action.payload },
@@ -189,5 +191,5 @@ const userSlice = createSlice({
   }
 });
 
-export const { setUserData, setCurrentAddress, setCurrentCity, setCurrentState, setShopsInMyCity, setItemsInMyCity, addToCart, updateQuantity, removeCartItem, setMyOrders, addMyOrder, updateOrderStatus, setSearchItems, setTotalAmount, setSocket, updateRealtimeOrderStatus } = userSlice.actions;
+export const { setUserData, setAuthLoading, setCurrentAddress, setCurrentCity, setCurrentState, setShopsInMyCity, setItemsInMyCity, addToCart, updateQuantity, removeCartItem, setMyOrders, addMyOrder, updateOrderStatus, setSearchItems, setTotalAmount, setSocket, updateRealtimeOrderStatus } = userSlice.actions;
 export default userSlice.reducer;
