@@ -37,6 +37,7 @@ const AuthPage = ({ initialTab = "login" }) => {
   const [googleUserData, setGoogleUserData] = useState(null);
   const [selectedRole, setSelectedRole] = useState(null);
   const [roleLoading, setRoleLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   // ─── Sign In Handler ───────────────────────────────────────
   const handleSignIn = async () => {
@@ -64,6 +65,7 @@ const AuthPage = ({ initialTab = "login" }) => {
   // ─── Google Sign In Handler ─────────────────────────────────
   const handleSignInGoogle = async () => {
     setLoginErr("");
+    setGoogleLoading(true);
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
@@ -87,8 +89,11 @@ const AuthPage = ({ initialTab = "login" }) => {
     } catch (error) {
       console.log("Google sign in error:", error);
       setLoginErr(error?.response?.data?.message || error?.message || "Google sign in failed");
+    } finally {
+      setGoogleLoading(false);
     }
   };
+
 
   // ─── Sign Up Handler ───────────────────────────────────────
   const handleSignUp = async () => {
@@ -421,9 +426,16 @@ const AuthPage = ({ initialTab = "login" }) => {
                     className="w-full py-3.5 bg-white border border-slate-200 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-3 cursor-pointer"
                     onClick={handleSignInGoogle}
                     type="button"
+                    disabled={googleLoading}
                   >
-                    <GoogleIcon />
-                    Google
+                    {googleLoading ? (
+                      <ClipLoader size={20} color="#221810" />
+                    ) : (
+                      <>
+                        <GoogleIcon />
+                        Google
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
