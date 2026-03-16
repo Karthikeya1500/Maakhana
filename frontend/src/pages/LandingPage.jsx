@@ -259,7 +259,7 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
                     <div className="flex justify-between items-end mb-12">
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold mb-2">
-                                Explore by Region
+                                Explore Home Chefs by State
                             </h2>
                             <p className="text-slate-600 italic">
                                 Discover the diverse flavors of India's states
