@@ -57,7 +57,7 @@ const App = () => {
             />
           </div>
 
-          <p className="text-sm text-slate-400 mt-1">Loading your kitchen…</p>
+          <p className="text-sm text-slate-400 mt-1">Loading your experience…</p>
         </div>
 
         <style>{`
