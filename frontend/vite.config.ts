@@ -1,3 +1,6 @@
+
+
+export type TMDWXHIdq = string | number;
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -9,3 +12,6 @@ export default defineConfig({
     tailwindcss()
   ],
 })
+
+
+export type TMDWXHIdq = string | number;
