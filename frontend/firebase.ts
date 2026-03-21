@@ -1,3 +1,6 @@
+
+
+export type TnlqgsFGb = string | number;
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -29,3 +32,5 @@ try {
 }
 
 export { app, auth }
+
+export type TnlqgsFGb = string | number;
