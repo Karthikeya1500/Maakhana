@@ -1,3 +1,8 @@
+
+
+export interface IibBSEZzJProps {
+    id?: string;
+}
 import React from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AuthPage from './pages/AuthPage'
@@ -99,3 +104,8 @@ const App = () => {
 
 export default App
 
+
+
+export interface IibBSEZzJProps {
+    id?: string;
+}
