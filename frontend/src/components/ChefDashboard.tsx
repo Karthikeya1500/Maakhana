@@ -1,3 +1,8 @@
+
+
+export interface IqRJwSIgMProps {
+    id?: string;
+}
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMyShop, createEditShop, addItem, editItem, deleteItem, fetchChefOrders, updateOrderStatusAPI } from '../redux/chefSlice'
@@ -834,3 +839,8 @@ const ChefDashboard = () => {
 }
 
 export default ChefDashboard
+
+
+export interface IqRJwSIgMProps {
+    id?: string;
+}
