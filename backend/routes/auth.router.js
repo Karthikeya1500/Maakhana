@@ -1,15 +1,15 @@
 import express from "express"
-import { googleAuth, sendOtp, verifyOtp, resetPassword, signIn, signOut, signUp, setRole } from "../controllers/auth.controllers.js"
+import AuthController from "../controllers/auth.controllers.js"
 import isAuth from "../middlewares/isAuth.js"
 
 const authRouter = express.Router()
-authRouter.post("/signup", signUp)
-authRouter.post("/signin", signIn)
-authRouter.get("/signout", signOut)
-authRouter.post("/send-otp", sendOtp)
-authRouter.post("/verify-otp", verifyOtp)
-authRouter.post("/reset-password", resetPassword)
-authRouter.post("/google-auth", googleAuth)
-authRouter.post("/set-role", isAuth, setRole)
+authRouter.post("/signup", (req, res) => AuthController.signUp(req, res))
+authRouter.post("/signin", (req, res) => AuthController.signIn(req, res))
+authRouter.get("/signout", (req, res) => AuthController.signOut(req, res))
+authRouter.post("/send-otp", (req, res) => AuthController.sendOtp(req, res))
+authRouter.post("/verify-otp", (req, res) => AuthController.verifyOtp(req, res))
+authRouter.post("/reset-password", (req, res) => AuthController.resetPassword(req, res))
+authRouter.post("/google-auth", (req, res) => AuthController.googleAuth(req, res))
+authRouter.post("/set-role", isAuth, (req, res) => AuthController.setRole(req, res))
 
 export default authRouter
