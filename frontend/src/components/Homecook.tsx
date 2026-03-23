@@ -1,3 +1,8 @@
+
+
+export interface ITmNqjhTjProps {
+    id?: string;
+}
 import React from 'react'
 import ChefDashboard from './ChefDashboard'
 
@@ -6,3 +11,8 @@ const Homecook = () => {
 }
 
 export default Homecook
+
+
+export interface ITmNqjhTjProps {
+    id?: string;
+}
