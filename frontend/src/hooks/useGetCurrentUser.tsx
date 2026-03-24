@@ -1,3 +1,8 @@
+
+
+export interface IwMkoQNviProps {
+    id?: string;
+}
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { serverUrl } from '../App'
@@ -26,3 +31,8 @@ function useGetCurrentUser() {
 }
 
 export default useGetCurrentUser
+
+
+export interface IwMkoQNviProps {
+    id?: string;
+}
