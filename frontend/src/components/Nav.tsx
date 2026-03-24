@@ -1,3 +1,8 @@
+
+
+export interface IaHArLuUOProps {
+    id?: string;
+}
 import React, { useEffect, useState } from 'react'
 import { FaLocationDot } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
@@ -117,7 +122,7 @@ function Nav() {
                 <div className='w-[40px] h-[40px] rounded-full flex items-center justify-center bg-[#ff4d2d] text-white text-[18px] shadow-xl font-semibold cursor-pointer' onClick={() => setShowInfo(prev => !prev)}>
                     {userData?.fullName.slice(0, 1)}
                 </div>
-                {showInfo && <div className={`fixed top-[80px] right-[10px] 
+                {showInfo && <div className={`fixed top-[80px] right-[10px]
                     md:right-[10%] lg:right-[25%] w-[180px] bg-white shadow-2xl rounded-xl p-[20px] flex flex-col gap-[10px] z-[9999]`}>
                     <div className='text-[17px] font-semibold'>{userData.fullName}</div>
                     {userData.role == "Customer" && <div className='md:hidden text-[#ff4d2d] font-semibold cursor-pointer' onClick={() => navigate("/my-orders")}>My Orders</div>}
@@ -132,3 +137,8 @@ function Nav() {
 
 
 export default Nav
+
+
+export interface IaHArLuUOProps {
+    id?: string;
+}
