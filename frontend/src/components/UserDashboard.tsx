@@ -1,3 +1,8 @@
+
+
+export interface IHUWsTuelProps {
+    id?: string;
+}
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCartAPI } from '../redux/userSlice'
@@ -145,3 +150,8 @@ const UserDashboard = () => {
 }
 
 export default UserDashboard
+
+
+export interface IHUWsTuelProps {
+    id?: string;
+}
