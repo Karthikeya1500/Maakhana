@@ -1,3 +1,8 @@
+
+
+export interface ILievaXOhProps {
+    id?: string;
+}
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -45,3 +50,7 @@ function useGetCity() {
 }
 
 export default useGetCity
+
+export interface ILievaXOhProps {
+    id?: string;
+}
