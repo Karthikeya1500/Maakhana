@@ -1,3 +1,8 @@
+
+
+export interface IgVXLUjXyProps {
+    id?: string;
+}
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -117,3 +122,8 @@ const AllRegions = () => {
 };
 
 export default AllRegions;
+
+
+export interface IgVXLUjXyProps {
+    id?: string;
+}
