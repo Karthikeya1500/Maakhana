@@ -1,3 +1,8 @@
+
+
+export interface ISAOEBbbpProps {
+    id?: string;
+}
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -462,3 +467,8 @@ const Profile = () => {
 }
 
 export default Profile
+
+
+export interface ISAOEBbbpProps {
+    id?: string;
+}
