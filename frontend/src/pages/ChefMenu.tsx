@@ -1,3 +1,8 @@
+
+
+export interface IlYMsXnFsProps {
+    id?: string;
+}
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -510,3 +515,8 @@ const ChefMenu = () => {
 }
 
 export default ChefMenu
+
+
+export interface IlYMsXnFsProps {
+    id?: string;
+}
