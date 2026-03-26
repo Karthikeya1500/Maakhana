@@ -1,31 +1,22 @@
 import express from "express"
-import {
-    getCurrentUser,
-    updateUserLocation,
-    updateProfile,
-    addAddress,
-    updateAddress,
-    deleteAddress,
-    toggleFavoriteChef,
-    getFavoriteChefs
-} from "../controllers/user.controller.js"
+import UserController from "../controllers/user.controller.js"
 import isAuth from "../middlewares/isAuth.js"
 
 const userRouter = express.Router()
 
-userRouter.get("/current", isAuth, getCurrentUser)
-userRouter.post('/update-location', isAuth, updateUserLocation)
+userRouter.get("/current", isAuth, (req, res) => UserController.getCurrentUser(req, res))
+userRouter.post('/update-location', isAuth, (req, res) => UserController.updateUserLocation(req, res))
 
 // Profile
-userRouter.put("/profile", isAuth, updateProfile)
+userRouter.put("/profile", isAuth, (req, res) => UserController.updateProfile(req, res))
 
 // Addresses
-userRouter.post("/address", isAuth, addAddress)
-userRouter.put("/address/:addressId", isAuth, updateAddress)
-userRouter.delete("/address/:addressId", isAuth, deleteAddress)
+userRouter.post("/address", isAuth, (req, res) => UserController.addAddress(req, res))
+userRouter.put("/address/:addressId", isAuth, (req, res) => UserController.updateAddress(req, res))
+userRouter.delete("/address/:addressId", isAuth, (req, res) => UserController.deleteAddress(req, res))
 
 // Favorite chefs
-userRouter.get("/favorites", isAuth, getFavoriteChefs)
-userRouter.post("/favorites/:chefId", isAuth, toggleFavoriteChef)
+userRouter.get("/favorites", isAuth, (req, res) => UserController.getFavoriteChefs(req, res))
+userRouter.post("/favorites/:chefId", isAuth, (req, res) => UserController.toggleFavoriteChef(req, res))
 
 export default userRouter
