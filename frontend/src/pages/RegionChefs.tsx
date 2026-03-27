@@ -1,3 +1,8 @@
+
+
+export interface IexUFFZxSProps {
+    id?: string;
+}
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -335,3 +340,8 @@ const RegionChefs = () => {
 }
 
 export default RegionChefs
+
+
+export interface IexUFFZxSProps {
+    id?: string;
+}
