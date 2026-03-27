@@ -1,3 +1,8 @@
+
+
+export interface IEmGQtMIUProps {
+    id?: string;
+}
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -154,3 +159,8 @@ const MyOrders = () => {
 }
 
 export default MyOrders
+
+
+export interface IEmGQtMIUProps {
+    id?: string;
+}
