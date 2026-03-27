@@ -1,3 +1,8 @@
+
+
+export interface IpyPoVNqRProps {
+    id?: string;
+}
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -234,3 +239,8 @@ const ForgotPassword = () => {
 }
 
 export default ForgotPassword;
+
+
+export interface IpyPoVNqRProps {
+    id?: string;
+}
