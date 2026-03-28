@@ -1,3 +1,8 @@
+
+
+export interface IkyjGxCGRProps {
+    id?: string;
+}
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateQuantityAPI, removeFromCartAPI, placeOrderAPI } from '../redux/userSlice'
@@ -288,3 +293,8 @@ const Cart = () => {
 }
 
 export default Cart
+
+
+export interface IkyjGxCGRProps {
+    id?: string;
+}
