@@ -1,3 +1,8 @@
+
+
+export interface ISBcNOaIBProps {
+    id?: string;
+}
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -584,3 +589,8 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
 };
 
 export default LandingPage;
+
+
+export interface ISBcNOaIBProps {
+    id?: string;
+}
