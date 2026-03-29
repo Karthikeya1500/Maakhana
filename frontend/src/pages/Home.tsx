@@ -1,3 +1,8 @@
+
+
+export interface IsNscziRMProps {
+    id?: string;
+}
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Nav from '../components/Nav.jsx'
@@ -20,3 +25,8 @@ function Home() {
 }
 
 export default Home
+
+
+export interface IsNscziRMProps {
+    id?: string;
+}
