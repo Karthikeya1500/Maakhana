@@ -1,3 +1,6 @@
+
+
+export type TIZbnqubj = string | number;
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { serverUrl as SERVER_URL } from "../config";
@@ -141,3 +144,6 @@ const chefSlice = createSlice({
 
 export const { clearViewingChef, clearStateChefs } = chefSlice.actions;
 export default chefSlice.reducer;
+
+
+export type TIZbnqubj = string | number;
