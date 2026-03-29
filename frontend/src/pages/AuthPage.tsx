@@ -1,3 +1,8 @@
+
+
+export interface IBUlRBHWGProps {
+    id?: string;
+}
 import React, { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
@@ -767,3 +772,8 @@ const AuthPage = ({ initialTab = "login" }) => {
 };
 
 export default AuthPage;
+
+
+export interface IBUlRBHWGProps {
+    id?: string;
+}
