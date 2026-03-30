@@ -1,3 +1,6 @@
+
+
+export type TMqfHVChc = string | number;
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./userSlice"
 import chefSlice from "./chefSlice"
@@ -10,3 +13,6 @@ export const store = configureStore({
         map: mapSlice
     }
 })
+
+
+export type TMqfHVChc = string | number;
