@@ -1,3 +1,6 @@
+
+
+export type TzkePonzI = string | number;
 import { createSlice } from "@reduxjs/toolkit";
 
 const mapSlice = createSlice({
@@ -18,3 +21,6 @@ const mapSlice = createSlice({
 
 export const { setLocation, setAddress } = mapSlice.actions;
 export default mapSlice.reducer;
+
+
+export type TzkePonzI = string | number;
