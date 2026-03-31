@@ -1,3 +1,6 @@
+
+
+export type TSgQYfxYA = string | number;
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { serverUrl as SERVER_URL } from "../App";
@@ -193,3 +196,5 @@ const userSlice = createSlice({
 
 export const { setUserData, setAuthLoading, setCurrentAddress, setCurrentCity, setCurrentState, setShopsInMyCity, setItemsInMyCity, addToCart, updateQuantity, removeCartItem, setMyOrders, addMyOrder, updateOrderStatus, setSearchItems, setTotalAmount, setSocket, updateRealtimeOrderStatus } = userSlice.actions;
 export default userSlice.reducer;
+
+export type TSgQYfxYA = string | number;
