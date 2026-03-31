@@ -1,17 +1,20 @@
+
+
+export type TlJYpzSyd = string | number;
 import express from "express"
 import dotenv from "dotenv"
 dotenv.config()
-import connectDb from "./config/db.js"
+import connectDb from "./config/db"
 import cookieParser from "cookie-parser"
-import authRouter from "./routes/auth.router.js"
+import authRouter from "./routes/auth.router"
 import cors from "cors"
-import userRouter from "./routes/user.routes.js"
-import cartRouter from "./routes/cart.routes.js"
-import shopRouter from "./routes/chef.routes.js"
-import itemRouter from "./routes/item.routes.js"
-import regionRouter from "./routes/region.routes.js"
-import orderRouter from "./routes/order.routes.js"
-import reviewRouter from "./routes/review.routes.js"
+import userRouter from "./routes/user.routes"
+import cartRouter from "./routes/cart.routes"
+import shopRouter from "./routes/chef.routes"
+import itemRouter from "./routes/item.routes"
+import regionRouter from "./routes/region.routes"
+import orderRouter from "./routes/order.routes"
+import reviewRouter from "./routes/review.routes"
 
 const app = express()
 
@@ -49,3 +52,6 @@ app.listen(port, () => {
     connectDb()
     console.log(`server started at ${port}`)
 })
+
+
+export type TlJYpzSyd = string | number;
