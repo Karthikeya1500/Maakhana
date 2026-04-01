@@ -1,3 +1,6 @@
+
+
+export type TUkJwiHCw = string | number;
 import jwt from "jsonwebtoken"
 const isAuth=async (req,res,next) => {
     try {
@@ -17,3 +20,5 @@ const isAuth=async (req,res,next) => {
 }
 
 export default isAuth
+
+export type TUkJwiHCw = string | number;
