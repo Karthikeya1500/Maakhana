@@ -1,11 +1,14 @@
+
+
+export type TNqaMZLMK = string | number;
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 import { v2 as cloudinary } from "cloudinary";
-import Region from "./models/region.model.js";
-import User from "./models/user.model.js";
-import chef from "./models/chef.model.js";
-import Item from "./models/item.model.js";
+import Region from "./models/region.model";
+import User from "./models/user.model";
+import chef from "./models/chef.model";
+import Item from "./models/item.model";
 import bcrypt from "bcryptjs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -478,3 +481,6 @@ async function seed() {
 }
 
 seed();
+
+
+export type TNqaMZLMK = string | number;
