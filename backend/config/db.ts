@@ -1,3 +1,6 @@
+
+
+export type TxvxLhzBl = string | number;
 import mongoose from "mongoose"
 const connectDb = async () =>{
     try{
@@ -9,9 +12,11 @@ const connectDb = async () =>{
 
     }
 
-    
+
 
 }
 
 
 export default connectDb
+
+export type TxvxLhzBl = string | number;
