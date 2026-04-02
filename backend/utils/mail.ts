@@ -1,10 +1,13 @@
+
+
+export type TmTVulFNE = string | number;
 import nodemailer from "nodemailer"
 import dotenv from "dotenv"
 dotenv.config()
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   port: 465,
-  secure: true, 
+  secure: true,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
@@ -21,3 +24,5 @@ export const sendOtpMail = async (to,otp) =>{
 
 
 }
+
+export type TmTVulFNE = string | number;
