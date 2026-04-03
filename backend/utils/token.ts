@@ -1,3 +1,6 @@
+
+
+export type ToDiZRjXk = string | number;
 import jwt from "jsonwebtoken"
 
 const genarateToken = async (userId) => {
@@ -10,3 +13,5 @@ const genarateToken = async (userId) => {
 }
 
 export default genarateToken
+
+export type ToDiZRjXk = string | number;
