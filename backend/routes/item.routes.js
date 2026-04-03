@@ -1,33 +1,23 @@
 import express from "express"
 import isAuth from "../middlewares/isAuth.js"
 import { upload } from "../middlewares/multer.js"
-import {
-    addItem,
-    editItem,
-    getItemById,
-    deleteItem,
-    getItemByCity,
-    getItemsByShop,
-    getItemsByState,
-    searchItems,
-    rating
-} from "../controllers/item.controllers.js"
+import ItemController from "../controllers/item.controllers.js"
 
 const itemRouter = express.Router()
 
 // Chef (protected) routes
-itemRouter.post("/add", isAuth, upload.single("image"), addItem)
-itemRouter.put("/edit/:itemId", isAuth, upload.single("image"), editItem)
-itemRouter.delete("/delete/:itemId", isAuth, deleteItem)
+itemRouter.post("/add", isAuth, upload.single("image"), (req, res) => ItemController.addItem(req, res))
+itemRouter.put("/edit/:itemId", isAuth, upload.single("image"), (req, res) => ItemController.editItem(req, res))
+itemRouter.delete("/delete/:itemId", isAuth, (req, res) => ItemController.deleteItem(req, res))
 
 // Public routes
-itemRouter.get("/search-items", searchItems)
-itemRouter.get("/by-city/:city", getItemByCity)
-itemRouter.get("/by-state/:state", getItemsByState)
-itemRouter.get("/by-shop/:shopId", getItemsByShop)
-itemRouter.get("/:itemId", getItemById)
+itemRouter.get("/search-items", (req, res) => ItemController.searchItems(req, res))
+itemRouter.get("/by-city/:city", (req, res) => ItemController.getItemByCity(req, res))
+itemRouter.get("/by-state/:state", (req, res) => ItemController.getItemsByState(req, res))
+itemRouter.get("/by-shop/:shopId", (req, res) => ItemController.getItemsByShop(req, res))
+itemRouter.get("/:itemId", (req, res) => ItemController.getItemById(req, res))
 
 // Rating
-itemRouter.post("/rate", isAuth, rating)
+itemRouter.post("/rate", isAuth, (req, res) => ItemController.rating(req, res))
 
 export default itemRouter
