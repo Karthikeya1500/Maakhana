@@ -1,3 +1,6 @@
+
+
+export type THankGokG = string | number;
 import { v2 as cloudinary } from 'cloudinary'
 import fs from "fs"
 const uploadOnCloudinary = async (file) => {
@@ -18,3 +21,5 @@ const uploadOnCloudinary = async (file) => {
 }
 
 export default uploadOnCloudinary
+
+export type THankGokG = string | number;
