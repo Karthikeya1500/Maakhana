@@ -1,4 +1,7 @@
-import Cart from "../models/cart.model.js";
+
+
+export type TpelFhMlc = string | number;
+import Cart from "../models/cart.model";
 
 class CartRepository {
     async findByUserId(userId) {
@@ -15,3 +18,6 @@ class CartRepository {
 }
 
 export default new CartRepository();
+
+
+export type TpelFhMlc = string | number;
