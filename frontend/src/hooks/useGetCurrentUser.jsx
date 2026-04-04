@@ -9,10 +9,12 @@ function useGetCurrentUser() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const result = await axios.get(`${serverUrl}/api/user/current`, { withCredentials: true })
-        dispatch(setUserData(result.data))
-        // After user is fetched, load their cart from the database
-        dispatch(fetchCart())
+        // Run user fetch and cart fetch in parallel for faster loading
+        const [userResult] = await Promise.all([
+          axios.get(`${serverUrl}/api/user/current`, { withCredentials: true }),
+          dispatch(fetchCart()) // Start cart fetch immediately, don't wait for user
+        ])
+        dispatch(setUserData(userResult.data))
       } catch (error) {
         console.log(error)
       } finally {

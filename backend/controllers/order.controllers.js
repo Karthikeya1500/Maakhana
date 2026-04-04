@@ -171,26 +171,37 @@ export const rateOrder = async (req, res) => {
 // GET /api/order/top-chefs — Get top chefs by rating
 export const getTopChefs = async (req, res) => {
     try {
-        // First get chefs with ratings
-        const ratedChefs = await chef.find({ "rating.count": { $gt: 0 } })
-            .sort({ "rating.average": -1 })
-            .limit(4)
-            .populate("homechef", "fullName email");
+        // Use aggregation for single efficient query instead of two sequential queries
+        const chefs = await chef.aggregate([
+            {
+                $addFields: {
+                    // Sort priority: rated chefs first (by rating), then newest
+                    sortPriority: { $cond: [{ $gt: ["$rating.count", 0] }, 0, 1] },
+                    sortValue: {
+                        $cond: [
+                            { $gt: ["$rating.count", 0] },
+                            "$rating.average",
+                            { $multiply: [{ $toLong: "$createdAt" }, -1] } // Negative for desc order
+                        ]
+                    }
+                }
+            },
+            { $sort: { sortPriority: 1, sortValue: -1 } },
+            { $limit: 4 },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "homechef",
+                    foreignField: "_id",
+                    as: "homechef",
+                    pipeline: [{ $project: { fullName: 1, email: 1 } }]
+                }
+            },
+            { $unwind: { path: "$homechef", preserveNullAndEmptyArrays: true } },
+            { $project: { sortPriority: 0, sortValue: 0 } }
+        ]);
 
-        // If we have enough rated chefs, return them
-        if (ratedChefs.length >= 4) {
-            return res.status(200).json(ratedChefs);
-        }
-
-        // Otherwise, fill remaining slots with newest chefs
-        const existingIds = ratedChefs.map(c => c._id);
-        const remaining = 4 - ratedChefs.length;
-        const newChefs = await chef.find({ _id: { $nin: existingIds } })
-            .sort({ createdAt: -1 })
-            .limit(remaining)
-            .populate("homechef", "fullName email");
-
-        return res.status(200).json([...ratedChefs, ...newChefs]);
+        return res.status(200).json(chefs);
     } catch (error) {
         return res.status(500).json({ message: `get top chefs error: ${error}` });
     }
@@ -199,29 +210,38 @@ export const getTopChefs = async (req, res) => {
 // GET /api/order/most-ordered — Get most ordered dishes
 export const getMostOrderedDishes = async (req, res) => {
     try {
-        // First get dishes that have been ordered
-        const orderedDishes = await Item.find({ orderCount: { $gt: 0 }, isAvailable: true })
-            .sort({ orderCount: -1 })
-            .limit(6)
-            .populate("shop", "name image city state");
+        // Use aggregation for single efficient query instead of two sequential queries
+        const dishes = await Item.aggregate([
+            { $match: { isAvailable: true } },
+            {
+                $addFields: {
+                    // Sort priority: ordered dishes first, then newest
+                    sortPriority: { $cond: [{ $gt: [{ $ifNull: ["$orderCount", 0] }, 0] }, 0, 1] },
+                    sortValue: {
+                        $cond: [
+                            { $gt: [{ $ifNull: ["$orderCount", 0] }, 0] },
+                            "$orderCount",
+                            { $multiply: [{ $toLong: "$createdAt" }, -1] }
+                        ]
+                    }
+                }
+            },
+            { $sort: { sortPriority: 1, sortValue: -1 } },
+            { $limit: 6 },
+            {
+                $lookup: {
+                    from: "chefs",
+                    localField: "shop",
+                    foreignField: "_id",
+                    as: "shop",
+                    pipeline: [{ $project: { name: 1, image: 1, city: 1, state: 1 } }]
+                }
+            },
+            { $unwind: { path: "$shop", preserveNullAndEmptyArrays: true } },
+            { $project: { sortPriority: 0, sortValue: 0 } }
+        ]);
 
-        // If we have enough ordered dishes, return them
-        if (orderedDishes.length >= 6) {
-            return res.status(200).json(orderedDishes);
-        }
-
-        // Otherwise, fill remaining slots with newest available items
-        const existingIds = orderedDishes.map(d => d._id);
-        const remaining = 6 - orderedDishes.length;
-        const newDishes = await Item.find({
-            _id: { $nin: existingIds },
-            isAvailable: true
-        })
-            .sort({ createdAt: -1 })
-            .limit(remaining)
-            .populate("shop", "name image city state");
-
-        return res.status(200).json([...orderedDishes, ...newDishes]);
+        return res.status(200).json(dishes);
     } catch (error) {
         return res.status(500).json({ message: `get most ordered dishes error: ${error}` });
     }

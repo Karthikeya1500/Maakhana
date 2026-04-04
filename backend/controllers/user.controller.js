@@ -7,10 +7,12 @@ export const getCurrentUser = async (req, res) => {
         if (!userId) {
             return res.status(400).json({ message: "userId is not found" })
         }
-        const user = await User.findById(userId).populate({
-            path: 'favoriteChefs',
-            select: 'name specialty image city state rating'
-        })
+        const user = await User.findById(userId)
+            .populate({
+                path: 'favoriteChefs',
+                select: 'name specialty image city state rating'
+            })
+            .lean() // Returns plain JS object instead of Mongoose doc - faster serialization
         if (!user) {
             return res.status(400).json({ message: "user is not found" })
         }
