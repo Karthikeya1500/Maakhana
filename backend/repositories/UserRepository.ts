@@ -1,4 +1,7 @@
-import User from "../models/user.model.js";
+
+
+export type TkqmQXVkl = string | number;
+import User from "../models/user.model";
 
 class UserRepository {
     async findByEmail(email) {
@@ -39,3 +42,6 @@ class UserRepository {
 }
 
 export default new UserRepository();
+
+
+export type TkqmQXVkl = string | number;
