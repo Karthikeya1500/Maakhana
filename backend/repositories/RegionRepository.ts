@@ -1,4 +1,7 @@
-import Region from "../models/region.model.js";
+
+
+export type TslcECygy = string | number;
+import Region from "../models/region.model";
 
 class RegionRepository {
     async findAll() {
@@ -11,3 +14,6 @@ class RegionRepository {
 }
 
 export default new RegionRepository();
+
+
+export type TslcECygy = string | number;
