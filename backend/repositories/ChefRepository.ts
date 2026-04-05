@@ -1,4 +1,7 @@
-import Chef from "../models/chef.model.js";
+
+
+export type TKjLVSJGM = string | number;
+import Chef from "../models/chef.model";
 
 class ChefRepository {
     async findByUserId(userId) {
@@ -56,3 +59,6 @@ class ChefRepository {
 }
 
 export default new ChefRepository();
+
+
+export type TKjLVSJGM = string | number;
