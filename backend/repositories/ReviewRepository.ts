@@ -1,4 +1,7 @@
-import Review from "../models/review.model.js";
+
+
+export type TOsiTmvEg = string | number;
+import Review from "../models/review.model";
 
 class ReviewRepository {
     async create(data) {
@@ -27,3 +30,6 @@ class ReviewRepository {
 }
 
 export default new ReviewRepository();
+
+
+export type TOsiTmvEg = string | number;
