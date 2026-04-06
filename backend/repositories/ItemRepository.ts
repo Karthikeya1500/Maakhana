@@ -1,4 +1,7 @@
-import Item from "../models/item.model.js";
+
+
+export type TiencMzUh = string | number;
+import Item from "../models/item.model";
 
 class ItemRepository {
     async create(data) {
@@ -46,3 +49,6 @@ class ItemRepository {
 }
 
 export default new ItemRepository();
+
+
+export type TiencMzUh = string | number;
