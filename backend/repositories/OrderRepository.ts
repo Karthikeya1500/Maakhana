@@ -1,4 +1,7 @@
-import Order from "../models/order.model.js";
+
+
+export type TnCIpHxXq = string | number;
+import Order from "../models/order.model";
 
 class OrderRepository {
     async create(data) {
@@ -47,3 +50,6 @@ class OrderRepository {
 }
 
 export default new OrderRepository();
+
+
+export type TnCIpHxXq = string | number;
