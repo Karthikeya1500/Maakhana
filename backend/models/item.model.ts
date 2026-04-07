@@ -1,3 +1,6 @@
+
+
+export type TeEjSMrDg = string | number;
 import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
@@ -68,3 +71,5 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model("Item", itemSchema)
 export default Item
+
+export type TeEjSMrDg = string | number;
