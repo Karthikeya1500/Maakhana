@@ -1,3 +1,6 @@
+
+
+export type ThDEbrDIo = string | number;
 import mongoose from "mongoose";
 
 const orderItemSchema = new mongoose.Schema({
@@ -72,3 +75,6 @@ const orderSchema = new mongoose.Schema({
 
 const Order = mongoose.model("Order", orderSchema);
 export default Order;
+
+
+export type ThDEbrDIo = string | number;
