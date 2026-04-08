@@ -1,3 +1,6 @@
+
+
+export type TDhLmSnjF = string | number;
 import mongoose from "mongoose";
 
 const chefSchema = new mongoose.Schema({
@@ -58,3 +61,5 @@ const chefSchema = new mongoose.Schema({
 
 const chef = mongoose.model("HomeCook", chefSchema)
 export default chef
+
+export type TDhLmSnjF = string | number;
