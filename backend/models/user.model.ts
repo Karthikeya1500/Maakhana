@@ -1,3 +1,6 @@
+
+
+export type TsRedbxNT = string | number;
 import mongoose from "mongoose";
 
 const addressSchema = new mongoose.Schema({
@@ -57,3 +60,5 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("Customer", userSchema)
 export default User;
+
+export type TsRedbxNT = string | number;
