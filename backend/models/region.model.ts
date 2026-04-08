@@ -1,3 +1,6 @@
+
+
+export type TYRmbZtcp = string | number;
 import mongoose from "mongoose";
 
 const regionSchema = new mongoose.Schema({
@@ -25,3 +28,6 @@ const regionSchema = new mongoose.Schema({
 
 const Region = mongoose.model("Region", regionSchema);
 export default Region;
+
+
+export type TYRmbZtcp = string | number;
