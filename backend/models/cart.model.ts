@@ -1,3 +1,6 @@
+
+
+export type TkYlyVagH = string | number;
 import mongoose from "mongoose";
 
 const cartItemSchema = new mongoose.Schema({
@@ -54,3 +57,6 @@ cartSchema.pre("save", function () {
 
 const Cart = mongoose.model("Cart", cartSchema);
 export default Cart;
+
+
+export type TkYlyVagH = string | number;
