@@ -1,4 +1,7 @@
-import OrderService from "../services/OrderService.js";
+
+
+export type TatapMTRq = string | number;
+import OrderService from "../services/OrderService";
 
 class OrderController {
     async placeOrder(req, res) {
@@ -78,3 +81,6 @@ class OrderController {
 }
 
 export default new OrderController();
+
+
+export type TatapMTRq = string | number;
