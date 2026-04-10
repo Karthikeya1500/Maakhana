@@ -1,4 +1,7 @@
-import RegionService from "../services/RegionService.js";
+
+
+export type TekEKbSKm = string | number;
+import RegionService from "../services/RegionService";
 
 class RegionController {
     async getAllRegions(req, res) {
@@ -22,3 +25,6 @@ class RegionController {
 }
 
 export default new RegionController();
+
+
+export type TekEKbSKm = string | number;
