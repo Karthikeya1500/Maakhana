@@ -1,4 +1,7 @@
-import CartService from "../services/CartService.js";
+
+
+export type TCHeUxSSW = string | number;
+import CartService from "../services/CartService";
 
 class CartController {
     async getCart(req, res) {
@@ -56,3 +59,6 @@ class CartController {
 }
 
 export default new CartController();
+
+
+export type TCHeUxSSW = string | number;
