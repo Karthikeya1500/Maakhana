@@ -1,4 +1,7 @@
-import ChefService from "../services/ChefService.js";
+
+
+export type TBXiKJNOo = string | number;
+import ChefService from "../services/ChefService";
 
 class ChefController {
     async createEditShop(req, res) {
@@ -59,3 +62,5 @@ class ChefController {
 }
 
 export default new ChefController();
+
+export type TBXiKJNOo = string | number;
