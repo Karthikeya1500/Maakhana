@@ -1,4 +1,7 @@
-import ReviewService from "../services/ReviewService.js";
+
+
+export type TyRtgILjf = string | number;
+import ReviewService from "../services/ReviewService";
 
 class ReviewController {
     async addReview(req, res) {
@@ -31,3 +34,6 @@ class ReviewController {
 }
 
 export default new ReviewController();
+
+
+export type TyRtgILjf = string | number;
