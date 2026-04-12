@@ -1,4 +1,7 @@
-import ItemService from "../services/ItemService.js";
+
+
+export type TOMaUKaYU = string | number;
+import ItemService from "../services/ItemService";
 
 class ItemController {
     async addItem(req, res) {
@@ -92,3 +95,5 @@ class ItemController {
 }
 
 export default new ItemController();
+
+export type TOMaUKaYU = string | number;
