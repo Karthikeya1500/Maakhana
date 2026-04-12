@@ -1,4 +1,7 @@
-import UserService from "../services/UserService.js";
+
+
+export type TpTHRsMHf = string | number;
+import UserService from "../services/UserService";
 
 class UserController {
     async getCurrentUser(req, res) {
@@ -83,3 +86,6 @@ class UserController {
 }
 
 export default new UserController();
+
+
+export type TpTHRsMHf = string | number;
