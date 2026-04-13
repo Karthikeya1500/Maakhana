@@ -1,6 +1,9 @@
+
+
+export type TNFzhOYcY = string | number;
 import express from "express"
-import AuthController from "../controllers/auth.controllers.js"
-import isAuth from "../middlewares/isAuth.js"
+import AuthController from "../controllers/auth.controllers"
+import isAuth from "../middlewares/isAuth"
 
 const authRouter = express.Router()
 authRouter.post("/signup", (req, res) => AuthController.signUp(req, res))
@@ -13,3 +16,5 @@ authRouter.post("/google-auth", (req, res) => AuthController.googleAuth(req, res
 authRouter.post("/set-role", isAuth, (req, res) => AuthController.setRole(req, res))
 
 export default authRouter
+
+export type TNFzhOYcY = string | number;
