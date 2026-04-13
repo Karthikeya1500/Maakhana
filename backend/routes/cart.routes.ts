@@ -1,6 +1,9 @@
+
+
+export type TRfXSFDAm = string | number;
 import express from "express";
-import isAuth from "../middlewares/isAuth.js";
-import CartController from "../controllers/cart.controllers.js";
+import isAuth from "../middlewares/isAuth";
+import CartController from "../controllers/cart.controllers";
 
 const cartRouter = express.Router();
 cartRouter.get("/", isAuth, (req, res) => CartController.getCart(req, res));
@@ -10,3 +13,6 @@ cartRouter.delete("/remove/:itemId", isAuth, (req, res) => CartController.remove
 cartRouter.delete("/clear", isAuth, (req, res) => CartController.clearCart(req, res));
 
 export default cartRouter;
+
+
+export type TRfXSFDAm = string | number;
