@@ -1,6 +1,9 @@
+
+
+export type ThFbQZjjJ = string | number;
 import express from "express";
-import isAuth from "../middlewares/isAuth.js";
-import OrderController from "../controllers/order.controllers.js";
+import isAuth from "../middlewares/isAuth";
+import OrderController from "../controllers/order.controllers";
 
 const orderRouter = express.Router();
 orderRouter.get("/top-chefs", (req, res) => OrderController.getTopChefs(req, res));
@@ -12,3 +15,6 @@ orderRouter.get("/chef-orders", isAuth, (req, res) => OrderController.getChefOrd
 orderRouter.put("/update-status/:orderId", isAuth, (req, res) => OrderController.updateOrderStatus(req, res));
 
 export default orderRouter;
+
+
+export type ThFbQZjjJ = string | number;
