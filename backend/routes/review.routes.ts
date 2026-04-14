@@ -1,6 +1,9 @@
+
+
+export type TMWUQIfMz = string | number;
 import express from "express";
-import ReviewController from "../controllers/review.controllers.js";
-import isAuth from "../middlewares/isAuth.js";
+import ReviewController from "../controllers/review.controllers";
+import isAuth from "../middlewares/isAuth";
 
 const router = express.Router();
 
@@ -9,3 +12,6 @@ router.get("/chef/:chefId", (req, res) => ReviewController.getChefReviews(req, r
 router.get("/item/:itemId", (req, res) => ReviewController.getItemReviews(req, res));
 
 export default router;
+
+
+export type TMWUQIfMz = string | number;
