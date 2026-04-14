@@ -1,6 +1,9 @@
+
+
+export type TboQJVqjg = string | number;
 import express from "express"
-import UserController from "../controllers/user.controller.js"
-import isAuth from "../middlewares/isAuth.js"
+import UserController from "../controllers/user.controller"
+import isAuth from "../middlewares/isAuth"
 
 const userRouter = express.Router()
 
@@ -14,3 +17,5 @@ userRouter.get("/favorites", isAuth, (req, res) => UserController.getFavoriteChe
 userRouter.post("/favorites/:chefId", isAuth, (req, res) => UserController.toggleFavoriteChef(req, res))
 
 export default userRouter
+
+export type TboQJVqjg = string | number;
