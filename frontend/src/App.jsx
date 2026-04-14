@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AuthPage from './pages/AuthPage'
 import ForgotPassword from './pages/ForgotPassword'
 import LandingPage from './pages/LandingPage'
@@ -21,9 +21,13 @@ const App = () => {
   useGetCurrentUser()
   useGetCity()
   const { userData, authLoading } = useSelector(state => state.user)
+  const location = useLocation()
+
+  // Always show public pages quickly without waiting for auth
+  const isPublicPage = location.pathname === '/' || location.pathname === '/regions' || location.pathname.startsWith('/region/') || location.pathname.startsWith('/chef/')
 
   // ─── Full-screen loader while checking auth ───
-  if (authLoading) {
+  if (authLoading && !isPublicPage) {
     return (
       <div
         className="min-h-screen w-full flex flex-col items-center justify-center bg-[#f8f7f6]"
