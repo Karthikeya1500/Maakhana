@@ -1,60 +1,55 @@
-# Maakhana Food — HomeCook Connect Platform 🍲👩‍🍳
-
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![React](https://img.shields.io/badge/Frontend-React.js-blue?logo=react)
-![Node.js](https://img.shields.io/badge/Backend-Node.js-green?logo=node.js)
-![MongoDB](https://img.shields.io/badge/Database-MongoDB-green?logo=mongodb)
+# Maakhana Food — HomeCook Connect Platform
 
 **Maakhana Food** is a full-stack application that connects customers with home chefs state-wise across India. Discover authentic, homemade food from various states (Punjab, Tamil Nadu, West Bengal, etc.), prepared by verified local cooks!
 
 ---
 
-## 📖 Table of Contents
-- [Overview](#-overview)
-- [Problem & Solution](#-problem--solution)
-- [Key Features](#-key-features)
-- [User Roles](#-user-roles)
-- [Tech Stack](#-tech-stack)
-- [Architecture & Diagrams](#-architecture--diagrams)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Future Enhancements](#-future-enhancements)
+## Table of Contents
+- [Overview](#overview)
+- [Problem & Solution](#problem--solution)
+- [Key Features](#key-features)
+- [User Roles](#user-roles)
+- [Tech Stack](#tech-stack)
+- [Architecture & Diagrams](#architecture--diagrams)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Future Enhancements](#future-enhancements)
 
 ---
 
-## 🌟 Overview
+## Overview
 The platform provides a decentralized marketplace for home chefs to showcase their native cuisines. Customers can browse food specific to Indian states, manage their cart, and place orders directly to the home chefs.
 
 It provides customized dashboards for **Customers**, **HomeChefs**, and **Admins**.
 
 ---
 
-## 🎯 Problem & Solution
+## Problem & Solution
 **The Problem**: Lack of visibility for home chefs, fragmented regional food discovery, and a missing trust layer for authentic home-cooked meals.
 **Our Solution**: A **state-centric food marketplace** with admin verification, layered backend architecture with robust object-oriented patterns, and secure JWT-based RBAC.
 
 ---
 
-## 🚀 Key Features
-### 🗺️ State-Based Discovery
+## Key Features
+### State-Based Discovery
 - Food is heavily categorized by individual Indian states.
 - Rich discovery interfaces, state pages, and advanced search filters.
 
-### 👩‍🍳 HomeChef Empowered
+### HomeChef Empowered
 - Chef registration with dedicated admin-approved native state specialties.
 - Dashboard for food operations (CRUD) and live order tracking.
 
-### 🛒 Customer Experience
+### Customer Experience
 - Browse authenticate state menus, scalable cart system, and order lifecycle management.
 - Post-delivery rating and review mechanics.
 
-### 🔐 Security & Admin
+### Security & Admin
 - Fully stateless JWT auth with Role-Based Access Control (RBAC).
 - Admin panel for comprehensive monitoring, approvals, and metrics.
 
 ---
 
-## 👥 User Roles
+## User Roles
 | Role          | Capabilities                                                                 |
 |---------------|------------------------------------------------------------------------------|
 | **Customer**  | Browse by state, add to cart, order tracking, review chefs.                  |
@@ -63,7 +58,7 @@ It provides customized dashboards for **Customers**, **HomeChefs**, and **Admins
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Frontend**: React.js, Vite, TailwindCSS / Material UI, Axios, React Router Dom
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose ODM)
@@ -72,7 +67,7 @@ It provides customized dashboards for **Customers**, **HomeChefs**, and **Admins
 
 ---
 
-## 📐 Architecture & Diagrams
+## Architecture & Diagrams
 This project heavily emphasizes clean structure and OOP principles. Please refer to our detailed design documents:
 - [System Idea & Details](./idea.md)
 - [Class Diagram](./classDiagram.md)
@@ -82,7 +77,7 @@ This project heavily emphasizes clean structure and OOP principles. Please refer
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```text
 Maakhana/
 ├── backend/               # Node.js Express server
@@ -102,7 +97,7 @@ Maakhana/
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js (v16+)
@@ -132,7 +127,7 @@ npm run dev
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 - Real Payment Gateway Integration (Razorpay/Stripe)
 - Real-time GPS-based delivery tracking
 - In-app messaging/chat system
