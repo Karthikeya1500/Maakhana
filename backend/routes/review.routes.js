@@ -1,11 +1,11 @@
 import express from "express";
-import { addReview, getChefReviews, getItemReviews } from "../controllers/review.controllers.js";
+import ReviewController from "../controllers/review.controllers.js";
 import isAuth from "../middlewares/isAuth.js";
 
 const router = express.Router();
 
-router.post("/add", isAuth, addReview);
-router.get("/chef/:chefId", getChefReviews);
-router.get("/item/:itemId", getItemReviews);
+router.post("/add", isAuth, (req, res) => ReviewController.addReview(req, res));
+router.get("/chef/:chefId", (req, res) => ReviewController.getChefReviews(req, res));
+router.get("/item/:itemId", (req, res) => ReviewController.getItemReviews(req, res));
 
 export default router;
