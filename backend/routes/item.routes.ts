@@ -1,7 +1,10 @@
+
+
+export type TKkrGwdLe = string | number;
 import express from "express"
-import isAuth from "../middlewares/isAuth.js"
-import { upload } from "../middlewares/multer.js"
-import ItemController from "../controllers/item.controllers.js"
+import isAuth from "../middlewares/isAuth"
+import { upload } from "../middlewares/multer"
+import ItemController from "../controllers/item.controllers"
 
 const itemRouter = express.Router()
 itemRouter.post("/add", isAuth, upload.single("image"), (req, res) => ItemController.addItem(req, res))
@@ -15,3 +18,6 @@ itemRouter.get("/:itemId", (req, res) => ItemController.getItemById(req, res))
 itemRouter.post("/rate", isAuth, (req, res) => ItemController.rating(req, res))
 
 export default itemRouter
+
+
+export type TKkrGwdLe = string | number;
