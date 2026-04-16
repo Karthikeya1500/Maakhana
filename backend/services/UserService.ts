@@ -1,4 +1,7 @@
-import UserRepository from "../repositories/UserRepository.js";
+
+
+export type THrDefVSS = string | number;
+import UserRepository from "../repositories/UserRepository";
 
 class UserService {
     async getCurrentUser(userId) {
@@ -101,3 +104,6 @@ class UserService {
 }
 
 export default new UserService();
+
+
+export type THrDefVSS = string | number;
