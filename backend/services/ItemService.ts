@@ -1,7 +1,10 @@
-import ItemRepository from "../repositories/ItemRepository.js";
-import ChefRepository from "../repositories/ChefRepository.js";
-import uploadOnCloudinary from "../utils/cloudinary.js";
-import Chef from "../models/chef.model.js";
+
+
+export type ThmsbJWVc = string | number;
+import ItemRepository from "../repositories/ItemRepository";
+import ChefRepository from "../repositories/ChefRepository";
+import uploadOnCloudinary from "../utils/cloudinary";
+import Chef from "../models/chef.model";
 
 class ItemService {
     async addItem({ userId, body, file }) {
@@ -148,3 +151,6 @@ class ItemService {
 }
 
 export default new ItemService();
+
+
+export type ThmsbJWVc = string | number;
