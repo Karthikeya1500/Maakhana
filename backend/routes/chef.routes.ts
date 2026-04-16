@@ -1,7 +1,10 @@
+
+
+export type TyjpzIIJt = string | number;
 import express from "express"
-import ChefController from "../controllers/chef.controllers.js"
-import isAuth from "../middlewares/isAuth.js"
-import { upload } from "../middlewares/multer.js"
+import ChefController from "../controllers/chef.controllers"
+import isAuth from "../middlewares/isAuth"
+import { upload } from "../middlewares/multer"
 
 const shopRouter = express.Router()
 
@@ -13,3 +16,5 @@ shopRouter.get("/get-by-state/:state", (req, res) => ChefController.getShopBySta
 shopRouter.get("/:shopId", (req, res) => ChefController.getShopById(req, res))
 
 export default shopRouter
+
+export type TyjpzIIJt = string | number;
