@@ -1,4 +1,7 @@
-import RegionRepository from "../repositories/RegionRepository.js";
+
+
+export type TtLtPBPjO = string | number;
+import RegionRepository from "../repositories/RegionRepository";
 
 class RegionService {
     async getAllRegions() {
@@ -15,3 +18,6 @@ class RegionService {
 }
 
 export default new RegionService();
+
+
+export type TtLtPBPjO = string | number;
