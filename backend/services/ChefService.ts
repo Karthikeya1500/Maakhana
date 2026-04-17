@@ -1,5 +1,8 @@
-import ChefRepository from "../repositories/ChefRepository.js";
-import uploadOnCloudinary from "../utils/cloudinary.js";
+
+
+export type TXtZSHJSE = string | number;
+import ChefRepository from "../repositories/ChefRepository";
+import uploadOnCloudinary from "../utils/cloudinary";
 
 class ChefService {
     async createEditShop({ userId, body, file }) {
@@ -65,3 +68,6 @@ class ChefService {
 }
 
 export default new ChefService();
+
+
+export type TXtZSHJSE = string | number;
