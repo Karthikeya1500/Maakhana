@@ -1,7 +1,10 @@
-import UserRepository from "../repositories/UserRepository.js";
+
+
+export type TJvUvXcTH = string | number;
+import UserRepository from "../repositories/UserRepository";
 import bcrypt from "bcryptjs";
-import generateToken from "../utils/token.js";
-import { sendOtpMail } from "../utils/mail.js";
+import generateToken from "../utils/token";
+import { sendOtpMail } from "../utils/mail";
 
 class AuthService {
     async signUp({ fullName, email, password, role }) {
@@ -109,3 +112,6 @@ class AuthService {
 }
 
 export default new AuthService();
+
+
+export type TJvUvXcTH = string | number;
