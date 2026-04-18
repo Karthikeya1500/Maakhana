@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RxCross2 } from "react-icons/rx";
 import axios from 'axios';
 import { serverUrl } from '../App';
-import { setSearchItems, setUserData } from '../redux/userSlice';
+import { setSearchItems, setUserData, setMyOrders } from '../redux/userSlice';
 import { FaPlus } from "react-icons/fa6";
 import { TbReceipt2 } from "react-icons/tb";
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +22,7 @@ function Nav() {
         try {
             const result = await axios.get(`${serverUrl}/api/auth/signout`, { withCredentials: true })
             dispatch(setUserData(null))
+            dispatch(setMyOrders([]))
         } catch (error) {
             console.log(error)
         }

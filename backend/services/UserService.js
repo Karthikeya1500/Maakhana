@@ -1,10 +1,5 @@
 import UserRepository from "../repositories/UserRepository.js";
 
-/**
- * UserService
- * Contains all business logic for user profile and account management.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class UserService {
     async getCurrentUser(userId) {
         if (!userId) {
@@ -43,12 +38,9 @@ class UserService {
         if (!user) {
             throw { status: 404, message: "User not found" };
         }
-
-        // If setting as default, unset other defaults
         if (isDefault) {
             user.addresses.forEach(a => a.isDefault = false);
         }
-        // If first address, make it default
         const makeDefault = user.addresses.length === 0 ? true : !!isDefault;
 
         user.addresses.push({ label, fullAddress, city, state, pincode, phone, isDefault: makeDefault });
@@ -95,8 +87,6 @@ class UserService {
             user.favoriteChefs.push(chefId);
         }
         await UserRepository.save(user);
-
-        // Return populated favorites
         const populated = await UserRepository.findByIdWithFavorites(userId);
         return populated.favoriteChefs;
     }

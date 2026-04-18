@@ -1,9 +1,5 @@
 import Order from "../models/order.model.js";
 
-/**
- * OrderRepository
- * Encapsulates all raw database operations for the Order collection.
- */
 class OrderRepository {
     async create(data) {
         return Order.create(data);

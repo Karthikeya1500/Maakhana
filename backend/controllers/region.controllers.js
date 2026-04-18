@@ -1,10 +1,5 @@
 import RegionService from "../services/RegionService.js";
 
-/**
- * RegionController
- * Handles HTTP request/response for all region routes.
- * Delegates all business logic to RegionService.
- */
 class RegionController {
     async getAllRegions(req, res) {
         try {

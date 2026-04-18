@@ -3,11 +3,6 @@ import ItemRepository from "../repositories/ItemRepository.js";
 import ChefRepository from "../repositories/ChefRepository.js";
 import CartRepository from "../repositories/CartRepository.js";
 
-/**
- * OrderService
- * Contains all business logic for order operations.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class OrderService {
     async placeOrder({ userId, deliveryAddress, paymentMethod }) {
         const cart = await CartRepository.findByUserId(userId);
@@ -15,8 +10,6 @@ class OrderService {
         if (!cart || cart.items.length === 0) {
             throw { status: 400, message: "Cart is empty" };
         }
-
-        // Group items by chef
         const chefItemsMap = {};
         for (const cartItem of cart.items) {
             const item = await ItemRepository.findById(cartItem.itemId);
@@ -35,13 +28,9 @@ class OrderService {
                 quantity: cartItem.quantity
             });
             chefItemsMap[chefId].totalAmount += cartItem.price * cartItem.quantity;
-
-            // Increment order count for the item
             item.orderCount = (item.orderCount || 0) + cartItem.quantity;
             await ItemRepository.save(item);
         }
-
-        // Create one order per chef
         const orders = [];
         for (const chefData of Object.values(chefItemsMap)) {
             const order = await OrderRepository.create({
@@ -52,8 +41,6 @@ class OrderService {
                 deliveryAddress: deliveryAddress || "",
                 paymentMethod: paymentMethod || "cod"
             });
-
-            // Increment meals served for the chef
             const chefDoc = await ChefRepository.findById(chefData.chefId);
             if (chefDoc) {
                 chefDoc.mealsServed = (chefDoc.mealsServed || 0) + chefData.items.reduce((sum, i) => sum + i.quantity, 0);
@@ -62,8 +49,6 @@ class OrderService {
 
             orders.push(order);
         }
-
-        // Clear the cart
         cart.items = [];
         await CartRepository.save(cart);
 
@@ -109,8 +94,6 @@ class OrderService {
         order.rating = rating;
         order.review = review || "";
         await OrderRepository.save(order);
-
-        // Update chef's average rating
         const chefDoc = await ChefRepository.findById(order.chef);
         if (chefDoc) {
             const allOrders = await OrderRepository.findRatedOrdersByChef(chefDoc._id);

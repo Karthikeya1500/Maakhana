@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { serverUrl } from '../App'
-import { setUserData } from '../redux/userSlice'
+import { setUserData, setMyOrders, fetchMyOrdersAPI } from '../redux/userSlice'
 
 const NAV_ITEMS = [
     { icon: 'person', label: 'Profile Details', key: 'profile' },
@@ -24,6 +24,10 @@ const Profile = () => {
     const navigate = useNavigate()
     const { userData, myOrders } = useSelector(state => state.user)
 
+    React.useEffect(() => {
+        dispatch(fetchMyOrdersAPI())
+    }, [dispatch])
+
     const [activeTab, setActiveTab] = useState('profile')
     const [form, setForm] = useState({
         fullName: userData?.fullName || '',
@@ -42,6 +46,7 @@ const Profile = () => {
         try {
             await axios.get(`${serverUrl}/api/auth/signout`, { withCredentials: true })
             dispatch(setUserData(null))
+            dispatch(setMyOrders([]))
             navigate('/')
         } catch (e) {
             console.log(e)

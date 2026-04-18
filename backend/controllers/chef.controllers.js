@@ -1,10 +1,5 @@
 import ChefService from "../services/ChefService.js";
 
-/**
- * ChefController
- * Handles HTTP request/response for all chef/shop routes.
- * Delegates all business logic to ChefService.
- */
 class ChefController {
     async createEditShop(req, res) {
         try {

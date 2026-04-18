@@ -3,8 +3,6 @@ import isAuth from "../middlewares/isAuth.js";
 import CartController from "../controllers/cart.controllers.js";
 
 const cartRouter = express.Router();
-
-// All cart routes require authentication
 cartRouter.get("/", isAuth, (req, res) => CartController.getCart(req, res));
 cartRouter.post("/add", isAuth, (req, res) => CartController.addToCart(req, res));
 cartRouter.put("/update", isAuth, (req, res) => CartController.updateCartItem(req, res));

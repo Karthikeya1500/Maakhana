@@ -3,11 +3,6 @@ import ChefRepository from "../repositories/ChefRepository.js";
 import uploadOnCloudinary from "../utils/cloudinary.js";
 import Chef from "../models/chef.model.js";
 
-/**
- * ItemService
- * Contains all business logic for menu item operations.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class ItemService {
     async addItem({ userId, body, file }) {
         console.log("addItem called with body:", body);
@@ -59,8 +54,6 @@ class ItemService {
         if (!item) {
             throw { status: 400, message: "item not found" };
         }
-
-        // Fetch the shop with populated items sorted by updatedAt desc (matches original)
         const shop = await Chef.findOne({ homechef: userId }).populate({
             path: "items",
             options: { sort: { updatedAt: -1 } }

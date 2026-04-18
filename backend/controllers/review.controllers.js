@@ -1,10 +1,5 @@
 import ReviewService from "../services/ReviewService.js";
 
-/**
- * ReviewController
- * Handles HTTP request/response for all review routes.
- * Delegates all business logic to ReviewService.
- */
 class ReviewController {
     async addReview(req, res) {
         try {

@@ -1,10 +1,5 @@
 import CartService from "../services/CartService.js";
 
-/**
- * CartController
- * Handles HTTP request/response for all cart routes.
- * Delegates all business logic to CartService.
- */
 class CartController {
     async getCart(req, res) {
         try {

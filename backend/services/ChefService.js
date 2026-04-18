@@ -1,11 +1,6 @@
 import ChefRepository from "../repositories/ChefRepository.js";
 import uploadOnCloudinary from "../utils/cloudinary.js";
 
-/**
- * ChefService
- * Contains all business logic for chef/shop operations.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class ChefService {
     async createEditShop({ userId, body, file }) {
         const { name, city, state, address, bio, specialty, experience } = body;

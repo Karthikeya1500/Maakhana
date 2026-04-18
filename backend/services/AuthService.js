@@ -3,11 +3,6 @@ import bcrypt from "bcryptjs";
 import generateToken from "../utils/token.js";
 import { sendOtpMail } from "../utils/mail.js";
 
-/**
- * AuthService
- * Contains all business logic for authentication flows.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class AuthService {
     async signUp({ fullName, email, password, role }) {
         const existingUser = await UserRepository.findByEmail(email);

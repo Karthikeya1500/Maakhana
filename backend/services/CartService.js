@@ -1,10 +1,5 @@
 import CartRepository from "../repositories/CartRepository.js";
 
-/**
- * CartService
- * Contains all business logic for shopping cart operations.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class CartService {
     async getCart(userId) {
         const cart = await CartRepository.findByUserId(userId);

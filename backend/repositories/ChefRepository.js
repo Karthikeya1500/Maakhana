@@ -1,9 +1,5 @@
 import Chef from "../models/chef.model.js";
 
-/**
- * ChefRepository
- * Encapsulates all raw database operations for the Chef (HomeCook) collection.
- */
 class ChefRepository {
     async findByUserId(userId) {
         return Chef.findOne({ homechef: userId });

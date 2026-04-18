@@ -1,10 +1,5 @@
 import UserService from "../services/UserService.js";
 
-/**
- * UserController
- * Handles HTTP request/response for all user profile routes.
- * Delegates all business logic to UserService.
- */
 class UserController {
     async getCurrentUser(req, res) {
         try {

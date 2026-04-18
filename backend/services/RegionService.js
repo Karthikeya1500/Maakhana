@@ -1,10 +1,5 @@
 import RegionRepository from "../repositories/RegionRepository.js";
 
-/**
- * RegionService
- * Contains all business logic for region lookup operations.
- * Does NOT import or use Express — fully framework-agnostic.
- */
 class RegionService {
     async getAllRegions() {
         return RegionRepository.findAll();

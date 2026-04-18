@@ -1,9 +1,5 @@
 import Item from "../models/item.model.js";
 
-/**
- * ItemRepository
- * Encapsulates all raw database operations for the Item collection.
- */
 class ItemRepository {
     async create(data) {
         return Item.create(data);

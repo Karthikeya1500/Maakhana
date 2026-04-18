@@ -1,10 +1,5 @@
 import OrderService from "../services/OrderService.js";
 
-/**
- * OrderController
- * Handles HTTP request/response for all order routes.
- * Delegates all business logic to OrderService.
- */
 class OrderController {
     async placeOrder(req, res) {
         try {

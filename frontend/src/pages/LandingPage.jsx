@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FiShoppingCart } from "react-icons/fi";
 import axios from "axios";
 import { serverUrl } from "../App";
-import { setUserData, addToCartAPI, fetchTopChefsAPI, fetchMostOrderedAPI } from "../redux/userSlice";
+import { setUserData, setMyOrders, addToCartAPI, fetchTopChefsAPI, fetchMostOrderedAPI } from "../redux/userSlice";
 
 const LandingPage = ({ isAuthenticated: propAuth = false }) => {
     const navigate = useNavigate();
@@ -48,6 +48,7 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
         try {
             await axios.get(`${serverUrl}/api/auth/signout`, { withCredentials: true });
             dispatch(setUserData(null));
+            dispatch(setMyOrders([]));
             setShowProfileMenu(false);
         } catch (error) {
             console.log(error);

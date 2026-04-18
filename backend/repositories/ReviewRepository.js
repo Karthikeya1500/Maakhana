@@ -1,9 +1,5 @@
 import Review from "../models/review.model.js";
 
-/**
- * ReviewRepository
- * Encapsulates all raw database operations for the Review collection.
- */
 class ReviewRepository {
     async create(data) {
         return Review.create(data);

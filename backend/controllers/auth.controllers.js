@@ -8,11 +8,6 @@ const cookieOptions = {
     httpOnly: true
 };
 
-/**
- * AuthController
- * Handles HTTP request/response for all authentication routes.
- * Delegates all business logic to AuthService.
- */
 class AuthController {
     async signUp(req, res) {
         try {

@@ -1,10 +1,5 @@
 import ItemService from "../services/ItemService.js";
 
-/**
- * ItemController
- * Handles HTTP request/response for all item routes.
- * Delegates all business logic to ItemService.
- */
 class ItemController {
     async addItem(req, res) {
         try {

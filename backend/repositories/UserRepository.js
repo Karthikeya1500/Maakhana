@@ -1,10 +1,5 @@
 import User from "../models/user.model.js";
 
-/**
- * UserRepository
- * Encapsulates all raw database operations for the User collection.
- * No business logic lives here — only CRUD/query methods.
- */
 class UserRepository {
     async findByEmail(email) {
         return User.findOne({ email });
