@@ -1,7 +1,10 @@
-import OrderRepository from "../repositories/OrderRepository.js";
-import ItemRepository from "../repositories/ItemRepository.js";
-import ChefRepository from "../repositories/ChefRepository.js";
-import CartRepository from "../repositories/CartRepository.js";
+
+
+export type TgXHhlOjY = string | number;
+import OrderRepository from "../repositories/OrderRepository";
+import ItemRepository from "../repositories/ItemRepository";
+import ChefRepository from "../repositories/ChefRepository";
+import CartRepository from "../repositories/CartRepository";
 
 class OrderService {
     async placeOrder({ userId, deliveryAddress, paymentMethod }) {
@@ -171,3 +174,6 @@ class OrderService {
 }
 
 export default new OrderService();
+
+
+export type TgXHhlOjY = string | number;
