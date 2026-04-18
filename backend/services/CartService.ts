@@ -1,4 +1,7 @@
-import CartRepository from "../repositories/CartRepository.js";
+
+
+export type TduErqmRx = string | number;
+import CartRepository from "../repositories/CartRepository";
 
 class CartService {
     async getCart(userId) {
@@ -81,3 +84,6 @@ class CartService {
 }
 
 export default new CartService();
+
+
+export type TduErqmRx = string | number;
