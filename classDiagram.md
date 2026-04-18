@@ -39,7 +39,7 @@ classDiagram
         -deliveryAddress: string
         -favoriteChefs: string[]
         -orderCount: number
-        +browseFood(state: string): FoodItem[]
+        +browseFood(region: string): FoodItem[]
         +addToCart(foodItemId: string, qty: number): Cart
         +placeOrder(cartId: string, address: string): Order
         +rateChef(chefId: string, rating: number, review: string): Review
@@ -47,7 +47,7 @@ classDiagram
     }
 
     class HomeChef {
-        -state: string
+        -region: string
         -specialties: string[]
         -bio: string
         -isApproved: boolean
@@ -71,7 +71,7 @@ classDiagram
         +deactivateUser(userId: string): void
     }
 
-    class State {
+    class Region {
         -id: string
         -name: string
         -description: string
@@ -92,13 +92,13 @@ classDiagram
         -isVeg: boolean
         -isAvailable: boolean
         -chefId: string
-        -stateId: string
+        -regionId: string
         -createdAt: Date
         -updatedAt: Date
         +updateDetails(dto: UpdateFoodDto): void
         +toggleAvailability(): void
         +getChef(): HomeChef
-        +getState(): State
+        +getRegion(): Region
     }
 
     class Cart {
@@ -133,13 +133,13 @@ classDiagram
         -status: OrderStatus
         -deliveryAddress: string
         -paymentId: string
-        -stateId: string
+        -regionId: string
         -placedAt: Date
         -deliveredAt: Date
         -updatedAt: Date
         +updateStatus(status: OrderStatus): void
         +cancel(): void
-        +getStateHandler(): OrderStateHandler
+        +getRegionHandler(): OrderRegionHandler
         +isDelivered(): boolean
         +calculateTotal(): number
     }
@@ -162,37 +162,6 @@ classDiagram
         CANCELLED
     }
 
-    class Payment {
-        -id: string
-        -orderId: string
-        -customerId: string
-        -amount: number
-        -method: PaymentMethod
-        -status: PaymentStatus
-        -transactionId: string
-        -paidAt: Date
-        +process(): void
-        +refund(): void
-        +getReceipt(): PaymentReceipt
-    }
-
-    class PaymentMethod {
-        <<enumeration>>
-        UPI
-        CARD
-        COD
-        WALLET
-    }
-
-    class PaymentStatus {
-        <<enumeration>>
-        PENDING
-        PROCESSING
-        SUCCESS
-        FAILED
-        REFUNDED
-    }
-
     class Review {
         -id: string
         -customerId: string
@@ -202,28 +171,6 @@ classDiagram
         -comment: string
         -createdAt: Date
         +update(rating: number, comment: string): void
-    }
-
-    class Notification {
-        -id: string
-        -userId: string
-        -type: NotificationType
-        -title: string
-        -message: string
-        -isRead: boolean
-        -createdAt: Date
-        +markAsRead(): void
-    }
-
-    class NotificationType {
-        <<enumeration>>
-        NEW_ORDER
-        ORDER_CONFIRMED
-        ORDER_PREPARING
-        ORDER_DELIVERED
-        CHEF_APPROVED
-        CHEF_REJECTED
-        SYSTEM
     }
 
     %% ===== SERVICE LAYER =====
@@ -239,18 +186,17 @@ classDiagram
 
     class FoodService {
         -foodRepo: IFoodRepository
-        -stateRepo: IStateRepository
+        -stateRepo: IRegionRepository
         +addFoodItem(chefId: string, dto: CreateFoodDto): FoodItem
         +updateFoodItem(id: string, dto: UpdateFoodDto): FoodItem
         +deleteFoodItem(id: string): void
-        +findByState(state: string): FoodItem[]
+        +findByRegion(region: string): FoodItem[]
         +searchFood(query: string): FoodItem[]
     }
 
     class OrderService {
         -orderRepo: IOrderRepository
         -cartService: CartService
-        -paymentService: PaymentService
         -validationChain: OrderValidator
         +createOrder(dto: CreateOrderDto): Order
         +updateOrderStatus(orderId: string, status: OrderStatus): void
@@ -267,46 +213,11 @@ classDiagram
         +clearCart(customerId: string): void
     }
 
-    class PaymentService {
-        -strategy: IPaymentStrategy
-        -paymentRepo: IPaymentRepository
-        +processPayment(orderId: string, amount: number, method: PaymentMethod): Payment
-        +refundPayment(paymentId: string): Payment
-        +setStrategy(strategy: IPaymentStrategy): void
-    }
-
-    class IPaymentStrategy {
-        <<interface>>
-        +pay(amount: number, details: PaymentDetails): PaymentResult
-    }
-
-    class UPIPaymentStrategy {
-        +pay(amount: number, details: PaymentDetails): PaymentResult
-    }
-
-    class CardPaymentStrategy {
-        +pay(amount: number, details: PaymentDetails): PaymentResult
-    }
-
     class ReviewService {
         -reviewRepo: IReviewRepository
         +addReview(dto: CreateReviewDto): Review
         +getReviewsByChef(chefId: string): Review[]
         +calculateAverageRating(chefId: string): number
-    }
-
-    class NotificationService {
-        -observers: INotificationObserver[]
-        -notificationRepo: INotificationRepository
-        +subscribe(observer: INotificationObserver): void
-        +notify(event: OrderEvent): void
-        +sendNotification(userId: string, notification: Notification): void
-        +getUnreadCount(userId: string): number
-    }
-
-    class INotificationObserver {
-        <<interface>>
-        +onEvent(event: OrderEvent): void
     }
 
     %% ===== VALIDATION CHAIN =====
@@ -350,7 +261,7 @@ classDiagram
         <<interface>>
         +findById(id: string): FoodItem
         +findByChef(chefId: string): FoodItem[]
-        +findByState(state: string): FoodItem[]
+        +findByRegion(region: string): FoodItem[]
         +save(food: FoodItem): FoodItem
         +update(food: FoodItem): void
         +delete(id: string): void
@@ -365,11 +276,11 @@ classDiagram
         +update(order: Order): void
     }
 
-    class IStateRepository {
+    class IRegionRepository {
         <<interface>>
-        +findAll(): State[]
-        +findByName(name: string): State
-        +findById(id: string): State
+        +findAll(): Region[]
+        +findByName(name: string): Region
+        +findById(id: string): Region
     }
 
     class ICartRepository {
@@ -380,12 +291,6 @@ classDiagram
         +delete(customerId: string): void
     }
 
-    class IPaymentRepository {
-        <<interface>>
-        +findByOrderId(orderId: string): Payment
-        +save(payment: Payment): Payment
-        +update(payment: Payment): void
-    }
 
     class IReviewRepository {
         <<interface>>
@@ -409,39 +314,28 @@ classDiagram
     HomeChef "1" --> "*" Order : receives
     HomeChef "1" --> "*" Review : receives
 
-    State "1" --> "*" FoodItem : categorizes
-    State "1" --> "*" HomeChef : belongs to
+    Region "1" --> "*" FoodItem : categorizes
+    Region "1" --> "*" HomeChef : belongs to
 
     Cart "1" *-- "*" CartItem : contains
     Order "1" *-- "*" OrderItem : contains
     Order --> OrderStatus
-    Order "1" --> "1" Payment : has
 
-    Payment --> PaymentMethod
-    Payment --> PaymentStatus
 
     Review --> Customer : written by
     Review --> HomeChef : about
 
-    User "1" --> "*" Notification : receives
-    Notification --> NotificationType
 
     %% Service layer relationships
     AuthService --> IUserRepository
     FoodService --> IFoodRepository
-    FoodService --> IStateRepository
+    FoodService --> IRegionRepository
     OrderService --> IOrderRepository
     OrderService --> CartService
-    OrderService --> PaymentService
     OrderService --> OrderValidator
     CartService --> ICartRepository
-    PaymentService --> IPaymentStrategy
-    PaymentService --> IPaymentRepository
     ReviewService --> IReviewRepository
-    NotificationService --> INotificationObserver
 
-    IPaymentStrategy <|.. UPIPaymentStrategy : implements
-    IPaymentStrategy <|.. CardPaymentStrategy : implements
 
     OrderValidator <|-- CartNotEmptyValidator : extends
     OrderValidator <|-- ItemsAvailableValidator : extends
@@ -454,9 +348,7 @@ classDiagram
 ## Design Patterns in the Class Diagram
 | Pattern                     | Where Applied                                      | Purpose                                                              |
 |-----------------------------|-----------------------------------------------------|----------------------------------------------------------------------|
-| **Strategy**                | `IPaymentStrategy` (UPI, Card processors)           | Swap payment processing algorithms at runtime                        |
 | **Chain of Responsibility** | `OrderValidator` chain                              | Validate orders through a pipeline of sequential validators          |
-| **Observer**                | `NotificationService` + `INotificationObserver`     | Decouple order events from notification consumers                    |
 | **Template Method**         | `OrderService.createOrder()`                        | Define order creation steps with customizable sub-steps              |
 | **State**                   | `OrderStatus` lifecycle                             | Manage order status transitions cleanly                              |
 | **Factory**                 | User creation (Customer, HomeChef, Admin)            | Create appropriate user subclass based on registration role          |
@@ -470,4 +362,3 @@ classDiagram
 | **Encapsulation** | Private fields with public methods in all domain models (e.g., `Cart.addItem()`, `Order.updateStatus()`) |
 | **Abstraction**   | Interfaces for repositories and strategies hide implementation details                          |
 | **Inheritance**   | `Customer`, `HomeChef`, and `Admin` extend abstract `User`; validators extend `OrderValidator`  |
-| **Polymorphism**  | `IPaymentStrategy` implementations swapped at runtime; `OrderValidator` chain processes any validator type |

@@ -1,30 +1,30 @@
 # Maakhana Food — HomeCook Connect Platform
 
 ## Overview
-**Maakhana Food** is a full-stack application that connects customers with home chefs state-wise across India. The platform enables customers to discover and order authentic, homemade food based on individual Indian states (e.g., Punjab, Tamil Nadu, West Bengal, Kerala, Gujarat). Home chefs — verified local cooks who prepare traditional cuisines — can register on the platform, list their food items categorized by their native state, set pricing, and manage incoming orders.
+**Maakhana Food** is a full-stack application that connects customers with home chefs region-wise across India. The platform enables customers to discover and order authentic, homemade food based on individual Indian regions (e.g., Punjab, Tamil Nadu, West Bengal, Kerala, Gujarat). Home chefs — verified local cooks who prepare traditional cuisines — can register on the platform, list their food items categorized by their native region, set pricing, and manage incoming orders.
 
 The system provides two distinct dashboards:
-1. **Customer Dashboard** — Browse food by state, manage cart, place orders, and rate chefs.
+1. **Customer Dashboard** — Browse food by region, manage cart, place orders, and rate chefs.
 2. **HomeChef Dashboard** — Manage food listings, view and update orders, and track performance.
 
 An **Admin** role oversees the platform — approving new chefs, managing users, and monitoring all orders.
 
 ---
 
-## Problem Statement
+## Problem Regionment
 1. **Lack of visibility for home chefs** — Talented home cooks across India have no centralized digital platform to showcase their authentic regional cuisines to a wider audience.
-2. **Inaccessible regional food** — Customers craving authentic food from specific Indian states (e.g., Bengali sweets, Rajasthani dal baati, Kerala appams) struggle to find local home chefs who prepare these dishes.
+2. **Inaccessible regional food** — Customers craving authentic food from specific Indian regions (e.g., Bengali sweets, Rajasthani dal baati, Kerala appams) struggle to find local home chefs who prepare these dishes.
 3. **No trust or verification** — Without a verification and review system, customers cannot assess the quality or reliability of home chefs.
 4. **Fragmented discovery** — Existing food delivery platforms focus on restaurants, not home-cooked food. Home chefs rely on word-of-mouth or social media, limiting their reach.
-5. **No state-based filtering** — Customers wanting food from a specific state have no structured way to search and filter based on geographic cuisine categories.
+5. **No region-based filtering** — Customers wanting food from a specific region have no structured way to search and filter based on geographic cuisine categories.
 
 ---
 
 ## Proposed Solution
-**Maakhana Food** solves these problems by creating a **state-centric food marketplace** that:
-- Organizes all food by **individual Indian states** (e.g., Punjab, Tamil Nadu, West Bengal, Kerala, Gujarat, Maharashtra).
-- Allows **home chefs** to register, get verified by admins, and list their food items under their native state.
-- Provides **customers** with powerful browsing and filtering tools to find authentic food from any Indian state.
+**Maakhana Food** solves these problems by creating a **region-centric food marketplace** that:
+- Organizes all food by **individual Indian regions** (e.g., Punjab, Tamil Nadu, West Bengal, Kerala, Gujarat, Maharashtra).
+- Allows **home chefs** to register, get verified by admins, and list their food items under their native region.
+- Provides **customers** with powerful browsing and filtering tools to find authentic food from any Indian region.
 - Implements a **review and rating system** so customers can rate chefs, building trust and accountability.
 - Uses a **layered backend architecture** with OOP principles for clean, maintainable, and scalable code.
 - Enforces **JWT-based authentication** and **role-based access control** (Customer, HomeChef, Admin) for security.
@@ -36,12 +36,12 @@ An **Admin** role oversees the platform — approving new chefs, managing users,
 ### In Scope
 - User registration and authentication (Customer, HomeChef, Admin roles)
 - HomeChef onboarding with admin approval workflow
-- State-based food categorization and browsing
+- Region-based food categorization and browsing
 - Food item management (CRUD) for home chefs
 - Cart management and order placement for customers
 - Order lifecycle management (placed → confirmed → preparing → delivered)
 - Customer reviews and chef ratings
-- Customer Dashboard with order history, cart, and state-based browsing
+- Customer Dashboard with order history, cart, and region-based browsing
 - HomeChef Dashboard with food management and order tracking
 - Admin panel for user management, chef approval, and order monitoring
 - RESTful API with layered architecture (Controller → Service → Repository)
@@ -58,20 +58,20 @@ An **Admin** role oversees the platform — approving new chefs, managing users,
 
 ## Key Features
 
-### 1. State-Based Food Discovery
-- **State Categories**: Food organized by individual Indian states (e.g., Punjab, Tamil Nadu, West Bengal, Kerala, Gujarat, Maharashtra, Rajasthan, UP, Bihar, Odisha).
-- **State Browsing**: Browse food items from any state across India with dedicated state pages.
-- **Food Browsing**: Rich food cards with images, descriptions, pricing, chef info, and state tags.
+### 1. Region-Based Food Discovery
+- **Region Categories**: Food organized by individual Indian regions (e.g., Punjab, Tamil Nadu, West Bengal, Kerala, Gujarat, Maharashtra, Rajasthan, UP, Bihar, Odisha).
+- **Region Browsing**: Browse food items from any region across India with dedicated region pages.
+- **Food Browsing**: Rich food cards with images, descriptions, pricing, chef info, and region tags.
 - **Search**: Search food items by name, cuisine type, or chef name.
 
 ### 2. HomeChef Management
-- **Chef Registration**: Home chefs register with their profile, native state, and specialties.
+- **Chef Registration**: Home chefs register with their profile, native region, and specialties.
 - **Admin Approval**: New chefs go through an admin verification process before listing food.
 - **Food CRUD**: Chefs can add, update, and delete food items from their dashboard.
 - **Order Management**: Chefs view incoming orders and update order status (confirmed → preparing → ready → delivered).
 
 ### 3. Customer Experience
-- **Browse by State**: Customers navigate food by state for authentic discovery.
+- **Browse by Region**: Customers navigate food by region for authentic discovery.
 - **Cart System**: Add multiple items to cart, adjust quantities, and proceed to checkout.
 - **Order Placement**: Place orders with delivery details and simulated payment.
 - **Order History**: View all past and current orders with status tracking.
@@ -80,10 +80,10 @@ An **Admin** role oversees the platform — approving new chefs, managing users,
 ### 4. Admin Panel
 - **Chef Approval**: Review and approve/reject new HomeChef registrations.
 - **User Management**: View, activate, or deactivate users across all roles.
-- **Order Monitoring**: View all platform orders with filters by status, state, and date.
+- **Order Monitoring**: View all platform orders with filters by status, region, and date.
 
 ### 5. Authentication & Security
-- **JWT Tokens**: Stateless authentication using JSON Web Tokens.
+- **JWT Tokens**: Regionless authentication using JSON Web Tokens.
 - **Role-Based Access**: Middleware enforcing access based on user role (Customer, HomeChef, Admin).
 - **Password Hashing**: Secure password storage using bcrypt.
 - **Protected Routes**: All sensitive endpoints require valid JWT and appropriate role.
@@ -122,13 +122,13 @@ An **Admin** role oversees the platform — approving new chefs, managing users,
 ## Design Patterns Used
 | Pattern                    | Where Applied                                      | Purpose                                                           |
 |----------------------------|----------------------------------------------------|-------------------------------------------------------------------|
-| **Strategy**               | Pricing strategies, food filtering algorithms      | Swap filtering/pricing logic at runtime based on state            |
+| **Strategy**               | Pricing strategies, food filtering algorithms      | Swap filtering/pricing logic at runtime based on region            |
 | **Observer**               | Notification system for order events               | Decouple order events from notification delivery                  |
 | **Factory**                | User creation (Customer, HomeChef, Admin)           | Create appropriate user type based on registration role           |
 | **State**                  | Order lifecycle (Placed → Confirmed → Preparing → Delivered) | Manage order status transitions cleanly               |
 | **Chain of Responsibility**| Order validation pipeline                          | Validate orders through sequential validators                     |
 | **Repository**             | Data access layer for all entities                 | Abstract database operations from business logic                  |
-| **Builder**                | Complex query building for food search/filter      | Build dynamic queries for state/food filtering                    |
+| **Builder**                | Complex query building for food search/filter      | Build dynamic queries for region/food filtering                    |
 | **Template Method**        | Order processing workflow                          | Define order processing steps with customizable sub-steps         |
 | **Singleton**              | Database connection, Logger                        | Ensure single instance for shared resources                       |
 
@@ -137,7 +137,7 @@ An **Admin** role oversees the platform — approving new chefs, managing users,
 ## User Roles
 | Role          | Description                                                                  |
 |---------------|------------------------------------------------------------------------------|
-| **Customer**  | Browses food by state, adds to cart, places orders, rates chefs.             |
+| **Customer**  | Browses food by region, adds to cart, places orders, rates chefs.             |
 | **HomeChef**  | Registers, gets approved, lists food items, manages orders.                  |
 | **Admin**     | Approves chefs, manages users, monitors all orders, platform configuration.  |
 
