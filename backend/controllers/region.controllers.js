@@ -1,27 +1,29 @@
-import Region from "../models/region.model.js";
+import RegionService from "../services/RegionService.js";
 
-// GET /api/region/all — Get all regions from the database
-export const getAllRegions = async (req, res) => {
-    try {
-        const regions = await Region.find().sort({ name: 1 });
-        return res.status(200).json(regions);
-    } catch (error) {
-        return res.status(500).json({ message: `get all regions error: ${error}` });
-    }
-};
-
-// GET /api/region/:regionName — Get a single region by name
-export const getRegionByName = async (req, res) => {
-    try {
-        const { regionName } = req.params;
-        const region = await Region.findOne({
-            name: { $regex: new RegExp(`^${regionName}$`, "i") }
-        });
-        if (!region) {
-            return res.status(404).json({ message: "Region not found" });
+/**
+ * RegionController
+ * Handles HTTP request/response for all region routes.
+ * Delegates all business logic to RegionService.
+ */
+class RegionController {
+    async getAllRegions(req, res) {
+        try {
+            const regions = await RegionService.getAllRegions();
+            return res.status(200).json(regions);
+        } catch (error) {
+            return res.status(500).json({ message: `get all regions error: ${error}` });
         }
-        return res.status(200).json(region);
-    } catch (error) {
-        return res.status(500).json({ message: `get region error: ${error}` });
     }
-};
+
+    async getRegionByName(req, res) {
+        try {
+            const region = await RegionService.getRegionByName(req.params.regionName);
+            return res.status(200).json(region);
+        } catch (error) {
+            if (error.status) return res.status(error.status).json({ message: error.message });
+            return res.status(500).json({ message: `get region error: ${error}` });
+        }
+    }
+}
+
+export default new RegionController();
