@@ -88,6 +88,98 @@ This project heavily emphasizes clean structure and OOP principles. Please refer
 
 ---
 
+## Software Architecture
+
+### Clean Architecture & Domain-Driven Design (DDD)
+
+Maakhana strictly follows **Clean Architecture** and **Domain-Driven Design** principles to keep the codebase decoupled, testable, and scalable.
+
+```
+Request → Controller → Service → Domain → Repository → Database
+```
+
+| Layer | Responsibility | Example Files |
+|---|---|---|
+| **Controllers** | Handle HTTP requests, validate inputs, delegate to services | `AuthController.ts`, `OrderController.ts` |
+| **Services** | Core business logic, orchestrate domain rules | `AuthService.ts`, `OrderService.ts` |
+| **Domain / Models** | Domain entities and business rules | `User.ts`, `FoodItem.ts`, `Order.ts` |
+| **Repositories** | Abstract data access, interact with MongoDB | `UserRepository.ts`, `OrderRepository.ts` |
+
+> Each layer **only depends on the layer below it** — never the other way around. This enforces separation of concerns and makes units independently testable.
+
+---
+
+### Object-Oriented Programming (OOP)
+
+The entire backend is built with strict OOP principles in TypeScript:
+
+| OOP Pillar | Implementation |
+|---|---|
+| **Encapsulation** | Each class manages its own state and exposes only what is necessary via public methods. Internal logic is kept private. |
+| **Abstraction** | Services expose clean interfaces to controllers without revealing implementation details (DB queries, hashing, token logic). |
+| **Inheritance** | Shared logic (e.g., base repository patterns) is extended by specialized repositories to avoid code duplication. |
+| **Polymorphism** | Strategy and State patterns allow objects to behave differently depending on role/state without modifying the calling code. |
+
+---
+
+### Design Patterns
+
+Six industry-standard design patterns are applied throughout the codebase:
+
+| Pattern | Where Used |
+|---|---|
+| **Strategy** | Payment processing and order-state transitions — different strategies execute based on context (e.g., customer vs. chef flow). |
+| **State** | Order lifecycle management — an order transitions through states (`Pending → Confirmed → Preparing → Delivered → Cancelled`) without brittle if/else chains. |
+| **Factory** | Creating domain objects (User, FoodItem, Order) — a factory method ensures consistent instantiation with validation. |
+| **Observer** | Notification system — when an order status changes, observers (email/notification handlers) are triggered automatically. |
+| **Repository** | Data access abstraction — all MongoDB operations are hidden behind repository interfaces, making the service layer DB-agnostic. |
+| **Singleton** | Database connection (`MongooseConfig`) — a single shared instance is reused across the entire application lifecycle. |
+
+---
+
+### SOLID Principles
+
+| Principle | Application |
+|---|---|
+| **S** — Single Responsibility | Every class has one job: controllers handle HTTP, services handle logic, repositories handle data. |
+| **O** — Open/Closed | New roles or features (e.g., a Delivery Partner role) can be added by extending classes, not modifying existing ones. |
+| **L** — Liskov Substitution | Repository implementations can be swapped (e.g., MongoDB → PostgreSQL) without breaking service contracts. |
+| **I** — Interface Segregation | Interfaces are role-specific — `IUserRepository` is not burdened with order or food-item concerns. |
+| **D** — Dependency Inversion | Services depend on repository interfaces, not concrete implementations, enabling clean testability and flexibility. |
+
+---
+
+## Frontend — Evaluation Guide
+
+> **Live URL:** [https://maakhana-food.vercel.app](https://maakhana-food.vercel.app)
+
+The frontend is a **React + TypeScript** SPA built with Vite. Key aspects for evaluation:
+
+- **Component Architecture**: Components are organized by feature (`/pages`, `/components`, `/hooks`). Each component has a single responsibility.
+- **State Management**: React Context API manages global auth state (user role, token) with a clean `AuthContext` provider.
+- **Role-Based UI**: The interface dynamically adapts based on user role — Customers see browse/cart/order UIs, HomeChefs see their dashboard, and Admins see the control panel.
+- **API Integration**: All backend calls are centralized via Axios with base URL configuration. JWT tokens are attached via request interceptors.
+- **Routing & Guards**: React Router Dom handles protected routes — unauthenticated users are redirected to login; role mismatches are blocked at the route level.
+- **Tech**: React.js, TypeScript, Vite, TailwindCSS / Material UI, Axios, React Router Dom, Firebase (auth layer).
+
+---
+
+## Backend — Evaluation Guide
+
+The backend is a **Node.js + Express + TypeScript** REST API with MongoDB. Key aspects for evaluation:
+
+- **Layered Architecture**: Strict Controller → Service → Repository separation. No business logic leaks into controllers; no DB logic leaks into services.
+- **Authentication**: Stateless JWT-based auth. Tokens carry the user role; every protected route passes through a middleware that verifies the token and injects the user context.
+- **RBAC (Role-Based Access Control)**: Three roles (Customer, HomeChef, Admin) each have distinct route guards. Unauthorized access returns proper `403` responses.
+- **OOP & Design Patterns**: As described above — Factory, Repository, Singleton, Observer, Strategy, and State patterns are implemented throughout.
+- **MongoDB + Mongoose**: Schema-driven models with strict typing. Relations between User, FoodItem, Order, and Review are maintained via Mongoose refs and population.
+- **Error Handling**: Centralized error-handling middleware catches and formats all errors consistently across the API.
+- **Tech**: Node.js, TypeScript, Express.js, MongoDB, Mongoose, JWT, bcrypt.
+
+---
+
+---
+
 ## Project Structure
 ```text
 Maakhana/
