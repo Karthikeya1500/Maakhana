@@ -59,6 +59,7 @@ It provides customized dashboards for **Customers**, **HomeChefs**, and **Admins
 ---
 
 ## Tech Stack
+- **Language**: TypeScript (Strict Typing)
 - **Frontend**: React.js with TypeScript, Vite, TailwindCSS / Material UI, Axios, React Router Dom
 - **Backend**: Node.js with TypeScript, Express.js
 - **Database**: MongoDB (Mongoose ODM)
