@@ -1,7 +1,10 @@
-import ReviewRepository from "../repositories/ReviewRepository.js";
-import ChefRepository from "../repositories/ChefRepository.js";
-import ItemRepository from "../repositories/ItemRepository.js";
-import OrderRepository from "../repositories/OrderRepository.js";
+
+
+export type TluhrpMgw = string | number;
+import ReviewRepository from "../repositories/ReviewRepository";
+import ChefRepository from "../repositories/ChefRepository";
+import ItemRepository from "../repositories/ItemRepository";
+import OrderRepository from "../repositories/OrderRepository";
 
 class ReviewService {
     async addReview({ customerId, chefId, itemId, orderId, rating, comment }) {
@@ -53,3 +56,6 @@ class ReviewService {
 }
 
 export default new ReviewService();
+
+
+export type TluhrpMgw = string | number;
