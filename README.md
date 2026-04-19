@@ -59,11 +59,11 @@ It provides customized dashboards for **Customers**, **HomeChefs**, and **Admins
 ---
 
 ## Tech Stack
-- **Frontend**: React.js, Vite, TailwindCSS / Material UI, Axios, React Router Dom
-- **Backend**: Node.js, Express.js
+- **Frontend**: React.js with TypeScript, Vite, TailwindCSS / Material UI, Axios, React Router Dom
+- **Backend**: Node.js with TypeScript, Express.js
 - **Database**: MongoDB (Mongoose ODM)
 - **Auth**: JSON Web Tokens (JWT)
-- **Architecture**: Layered architecture (Controller > Service > Model) & OOP Patterns
+- **Architecture**: Strict Object-Oriented Programming (OOP) & Layered Architecture (Controller > Service > Repository)
 
 ---
 
@@ -82,16 +82,18 @@ This project heavily emphasizes clean structure and OOP principles. Please refer
 Maakhana/
 ├── backend/               # Node.js Express server
 │   ├── config/            # Database & environment configurations
-│   ├── controllers/       # Route request handlers
+│   ├── controllers/       # Route request OOP handlers
 │   ├── middlewares/       # Auth and validation middlewares
 │   ├── models/            # Mongoose schemas
+│   ├── repositories/      # OOP Data access layer
 │   ├── routes/            # API routing definitions
+│   ├── services/          # OOP Business logic layer
 │   ├── utils/             # Helper functions and utilities
-│   └── index.js           # Server entry point
+│   └── index.ts           # Server entry point
 ├── frontend/              # React Vite application
 │   ├── public/            # Static assets
 │   ├── src/               # React components, pages, and logic
-│   └── vite.config.js     # Vite configuration
+│   └── vite.config.ts     # Vite configuration
 └── *.md                   # Documentation and Diagrams
 ```
 
@@ -114,7 +116,7 @@ cd Maakhana
 cd backend
 npm install
 # Set up .env variables (PORT, MONGO_URI, JWT_SECRET, etc.)
-node index.js
+npx ts-node index.ts
 ```
 
 ### 3. Setup Frontend Application
