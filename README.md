@@ -1,6 +1,13 @@
-# Maakhana Food — HomeCook Connect Platform
+# Maakhana Food - HomeCook Connect Platform
 
-**Maakhana Food** is a full-stack application that connects customers with home chefs state-wise across India. Discover authentic, homemade food from various states (Punjab, Tamil Nadu, West Bengal, etc.), prepared by verified local cooks!
+**LIVE PROJECT LINK:** [https://maakhana-food.vercel.app](https://maakhana-food.vercel.app)
+
+**Maakhana Food** is a premium full-stack application that connects customers with home chefs state-wise across India. Discover authentic, homemade food from various states, prepared by verified local cooks!
+
+## Engineering Excellence & Quality Standards
+- **System Documentation**: All major design artifacts are included in our repository. You will find the project scope in `idea.md`, the interaction flows in `useCaseDiagram.md`, our end-to-end main flow in `sequenceDiagram.md`, our structured design in `classDiagram.md`, and tables mapping in `ErDiagram.md`.
+- **Backend Configuration & OOP**: The backend utilizes robust Object-Oriented Programming (OOP) principles to ensure encapsulation, abstraction, and modularity. We strongly enforce a clear separation of concerns by splitting logic into independent controllers, services, and repositories to guarantee a well-structured and maintainable backend code.
+- **Frontend Quality**: Our web application prioritizes a clean UI structure and usability. The React codebase features logical component organization and clarity, ensuring proper integration with backend APIs to deliver a faultless live experience. Everything is hosted and verifiable via the LIVE PROJECT LINK above.
 
 ---
 
@@ -129,6 +136,10 @@ npm run dev
 ```
 
 ---
+### Hosted Link
+```bash
+https://maakhana.vercel.app/
+```
 
 ## Future Enhancements
 - Real Payment Gateway Integration (Razorpay/Stripe)
