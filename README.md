@@ -27,7 +27,10 @@
 ## Overview
 The platform provides a decentralized marketplace for home chefs to showcase their native cuisines. Customers can browse food specific to Indian states, manage their cart, and place orders directly to the home chefs.
 
-It provides customized dashboards for **Customers**, **HomeChefs**, and **Admins**.
+It provides customized dashboards for:
+- **Customers**
+- **HomeChefs**
+- **Admins**
 
 ---
 
