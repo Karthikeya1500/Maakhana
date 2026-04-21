@@ -60,25 +60,8 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
         }
     };
 
-    const handleBecomeChef = async () => {
-        if (!isAuthenticated) {
-            navigate("/signup");
-            return;
-        }
-        if (userData?.role === 'HomeCook') {
-            navigate("/");
-            return;
-        }
-        if (window.confirm("Do you want to switch your account to a Home Chef profile?")) {
-            try {
-                const { data } = await axios.post(`${serverUrl}/api/auth/set-role`, { role: "HomeCook" }, { withCredentials: true });
-                dispatch(setUserData(data));
-                navigate("/");
-            } catch (error) {
-                console.error(error);
-                alert("Failed to update role");
-            }
-        }
+    const scrollToExplore = () => {
+        document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth' });
     };
 
     const dishes = [
@@ -138,7 +121,7 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
                             <a className="text-sm font-semibold hover:text-[#f4a462] transition-colors cursor-pointer" href="#hero">Home</a>
                             <a className="text-sm font-semibold hover:text-[#f4a462] transition-colors cursor-pointer" href="#explore">Explore</a>
                             <a className="text-sm font-semibold hover:text-[#f4a462] transition-colors cursor-pointer" href="#about">About</a>
-                            <a className="text-sm font-semibold hover:text-[#f4a462] transition-colors cursor-pointer" onClick={handleBecomeChef}>Become a Chef</a>
+                            <a className="text-sm font-semibold hover:text-[#f4a462] transition-colors cursor-pointer" onClick={() => isAuthenticated ? scrollToExplore() : navigate("/signup")}>Become a Chef</a>
                         </nav>
 
                         {/* Right side: cart+profile when logged in, login buttons when guest */}
@@ -219,14 +202,14 @@ const LandingPage = ({ isAuthenticated: propAuth = false }) => {
                             <button
                                 className="bg-[#f4a462] hover:bg-[#f4a462]/90 text-slate-900 font-bold px-8 py-4 rounded-xl text-lg shadow-xl flex items-center gap-2 cursor-pointer active:scale-[0.98] transition-all"
                                 style={{ boxShadow: "0 12px 30px rgba(244, 164, 98, 0.35)" }}
-                                onClick={() => isAuthenticated ? document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth' }) : navigate("/signin")}
+                                onClick={() => isAuthenticated ? scrollToExplore() : navigate("/signin")}
                             >
                                 Order Now{" "}
                                 <span className="material-symbols-outlined">shopping_bag</span>
                             </button>
                             <button
                                 className="bg-[#4ade80]/20 hover:bg-[#4ade80]/30 text-[#4ade80] border border-[#4ade80]/30 backdrop-blur-md font-bold px-8 py-4 rounded-xl text-lg flex items-center gap-2 cursor-pointer active:scale-[0.98] transition-all"
-                                onClick={handleBecomeChef}
+                                onClick={() => isAuthenticated ? scrollToExplore() : navigate("/signup")}
                             >
                                 Become a Home Chef{" "}
                                 <span className="material-symbols-outlined">chef_hat</span>
